@@ -1,0 +1,128 @@
+{
+    "Primer_Tabla": {
+        "MetaData": [{
+            "RegisterQtty": 10
+        }],
+        "Data": [{
+                "mode": "NULLABLE",
+                "name": "id_1",
+                "type": "STRING",
+                "ispk": "true",
+                "format": "????##",
+                "letters": "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            },
+            {
+                "mode": "NULLABLE",
+                "name": "name",
+                "type": "STRING",
+                "faketype": "name"
+            },
+            {
+                "mode": "NULLABLE",
+                "name": "country",
+                "type": "STRING",
+                "faketype": "country"
+            },
+            {
+                "mode": "NULLABLE",
+                "name": "city",
+                "type": "STRING",
+                "faketype": "city"
+            }
+        ]
+    },
+    "Segunda_Tabla": {
+        "MetaData": [{
+            "RegisterQtty": 10
+        }],
+        "Data": [{
+                "mode": "NULLABLE",
+                "name": "id_1",
+                "type": "STRING",
+                "ispk": "true",
+                "format": "????##",
+                "letters": "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            },
+            {
+                "mode": "NULLABLE",
+                "name": "id_2",
+                "type": "STRING",
+                "ispk": "true",
+                "format": "????##",
+                "letters": "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            },
+            {
+                "mode": "NULLABLE",
+                "name": "about",
+                "type": "STRING",
+                "faketype": "sentence"
+            },
+            {
+                "mode": "NULLABLE",
+                "name": "name",
+                "type": "STRING",
+                "faketype": "name"
+            },
+            {
+                "mode": "NULLABLE",
+                "name": "country",
+                "type": "STRING",
+                "faketype": "country"
+            },
+            {
+                "mode": "NULLABLE",
+                "name": "amount",
+                "type": "STRING",
+                "faketype": "amount"
+            }
+        ]
+    },
+    "Tercer_Tabla": {
+        "MetaData": [{
+            "RegisterQtty": 10
+        }],
+        "Data": [{
+                "mode": "NULLABLE",
+                "name": "id_1",
+                "type": "STRING",
+                "ispk": "true",
+                "format": "????##",
+                "letters": "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            },
+            {
+                "mode": "NULLABLE",
+                "name": "id_1_T1",
+                "type": "STRING",
+                "isfk": "true",
+                "sourceTable": "Primer_Tabla",
+                "sourceField": "id_1"
+            },
+            {
+                "mode": "NULLABLE",
+                "name": "id_2_T2",
+                "type": "STRING",
+                "isfk": "true",
+                "sourceTable": "Segunda_Tabla",
+                "sourceField": "id_2"
+            },
+            {
+                "mode": "NULLABLE",
+                "name": "email",
+                "type": "STRING",
+                "faketype": "free_email"
+            },
+            {
+                "mode": "NULLABLE",
+                "name": "country",
+                "type": "STRING",
+                "faketype": "country"
+            },
+            {
+                "mode": "NULLABLE",
+                "name": "amount",
+                "type": "STRING",
+                "faketype": "amount"
+            }
+        ]
+    }
+}
