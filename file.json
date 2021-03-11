@@ -1,7 +1,7 @@
 {
-    "Primer_Tabla": {
+    "First_Table": {
         "MetaData": [{
-            "RegisterQtty": 10
+            "AmountOfRegisters": 16
         }],
         "Data": [{
                 "mode": "NULLABLE",
@@ -31,9 +31,9 @@
             }
         ]
     },
-    "Segunda_Tabla": {
+    "Second_Table": {
         "MetaData": [{
-            "RegisterQtty": 10
+            "AmountOfRegisters": 28
         }],
         "Data": [{
                 "mode": "NULLABLE",
@@ -77,9 +77,9 @@
             }
         ]
     },
-    "Tercer_Tabla": {
+    "Third_Table": {
         "MetaData": [{
-            "RegisterQtty": 10
+            "AmountOfRegisters": 45
         }],
         "Data": [{
                 "mode": "NULLABLE",
@@ -94,7 +94,7 @@
                 "name": "id_1_T1",
                 "type": "STRING",
                 "isfk": "true",
-                "sourceTable": "Primer_Tabla",
+                "sourceTable": "First_Table",
                 "sourceField": "id_1"
             },
             {
@@ -102,7 +102,7 @@
                 "name": "id_2_T2",
                 "type": "STRING",
                 "isfk": "true",
-                "sourceTable": "Segunda_Tabla",
+                "sourceTable": "Second_Table",
                 "sourceField": "id_2"
             },
             {
