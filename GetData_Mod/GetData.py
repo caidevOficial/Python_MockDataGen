@@ -18,14 +18,14 @@ import random
 
 
 def mySwitch(fakeType: str, fake: fk):
-    """[summary]
-
+    """
+    Simulates a switch, only used for Faker class.
     Args:
-        fakeType (str): [description]
-        fake (fk): [description]
+        fakeType (str): String with the name of the method from Faker Class.
+        fake (fk): The Faker Class.
 
     Returns:
-        [type]: [description]
+        function: one of the methods of Faker Class.
     """
     fakeAttr = 'name'
 
@@ -38,11 +38,14 @@ def mySwitch(fakeType: str, fake: fk):
 
 
 def getAmountOfRegisters(TABLE_DATA_Fields: dict, tableName: str):
-    """[summary]
-
+    """
+    Obtains the amount of registers from the config json.
     Args:
-        TABLE_DATA_Fields (dict): [description]
-        tableName (str): [description]
+        TABLE_DATA_Fields (dict): A dictionary with all the configs of the tables.
+        tableName (str): The name of the table to search the value.
+
+    Returns:
+        int: the amount of registers, otherwise 1000.
     """
 
     amountOfRegisters = 1000
@@ -51,22 +54,25 @@ def getAmountOfRegisters(TABLE_DATA_Fields: dict, tableName: str):
         listMetadata = TABLE_DATA_Fields[tableName]["MetaData"]
         for index in range(0, len(listMetadata)):
             if("RegisterQtty" in listMetadata[index]):
-                amountOfRegisters = listMetadata[index]["RegisterQtty"]
+                amountOfRegisters = listMetadata[index]["AmountOfRegisters"]
                 break
     except:
         print(
-            f'Error in obtaining the amount of registers. The default value was set to {amountOfRegisters}.')
+            f'\nError in obtaining the amount of registers. The default value was set to {amountOfRegisters}.')
 
     return amountOfRegisters
 
 
 def getRandomPkOrFk(listOfPk: dict, sourceTable: str, sourceField: str):
-    """[summary]
-
+    """
+    Obtains a random number from the list of pk of the table 'sourceTable'.
     Args:
-        listOfPk (dict): [description]
-        sourceTable (str): [description]
-        sourceField (str): [description]
+        listOfPk (dict): The variable with the structure of the tables with theirs pk inside.
+        sourceTable (str): Name of the table to search.
+        sourceField (str): Name of the field of the table to search the list of pks.
+
+    Returns:
+        [int]: A random number between the list of pks.
     """
 
     try:
@@ -74,20 +80,23 @@ def getRandomPkOrFk(listOfPk: dict, sourceTable: str, sourceField: str):
         randomPk = random.choice(listOfValues)
     except:
         randomPk = []
-        print(
-            f'Error getting the list of pk from the table {sourceTable}. An empty list will be returned')
+        print(f'\nError getting the list of pk from the table {sourceTable}. An empty list will be returned')
 
     return randomPk
 
 
 def createRecords(TABLE_FIELDS: list, tableName: str, amountOfRegisters: int, jsonVariable: dict):
-    """[summary]
-
+    """
+    Creates 'amountOfRegisters' registers for the table 'tableName'.
     Args:
-        TABLE_FIELDS (list): [description]
-        tableName (str): [description]
-        amountOfRegisters (int): [description]
-        jsonVariable (dict): [description]
+        TABLE_FIELDS (list): The variable with the configuration of the tables.
+        tableName (str): The name of the actual table to create the registers.
+        amountOfRegisters (int): The amount of registers.
+        jsonVariable (dict): The variable with the structure of the tables with theirs pk inside.
+
+    Returns:
+        string: A string with all the registers of the table.
+        dict: A dictionary with the table and its pks values.
     """
 
     tableRecords = ""
@@ -98,7 +107,7 @@ def createRecords(TABLE_FIELDS: list, tableName: str, amountOfRegisters: int, js
     fake = fk()
 
     print(
-        f'Creating registers for the table {tableName}, this action may taking a while...')
+        f'\nCreating registers for the table {tableName}, this action may taking a while...')
 
     for number in range(0, amountOfRegisters):
         try:
@@ -142,6 +151,6 @@ def createRecords(TABLE_FIELDS: list, tableName: str, amountOfRegisters: int, js
             jsonVariable.update(jsonOfThisTable)
         except:
             print(
-                f'Error getting the list of values of the "Data" field of {tableName}')
+                f'\nError getting the list of values of the "Data" field of {tableName}')
 
     return tableRecords, jsonVariable

@@ -20,71 +20,74 @@ import os
 
 def openFile(abspath: str):
     """[summary]
-
+    Opens the file specified in 'abspath'.
     Args:
-        abspath (str): [description]
+        abspath (str): The path with the name of the file to open.
+
+    Returns:
+        [dict]: [The json parsed with the configuration of the tables inside.]
     """
     try:
-        print(f'Trying to open {abspath}')
+        print(f'\nTrying to open {abspath}')
         with open(abspath, 'r+') as schemafile:
             TABLE_FIELDS = json.load(schemafile)
             print("Success: File Opened!")
     except:
         TABLE_FIELDS = {}
         print(
-            f'Error opening the file {abspath}, an empty dictionary will be returned.')
+            f'\nError opening the file {abspath}, an empty dictionary will be returned.')
 
     return TABLE_FIELDS
 
 
-def writeJSON(myDict: dict, tableName: str):
-    """[summary]
-
-    Args:
-        myDict (dict): [description]
-        tableName (str): [description]
+def writeJSON(myDict: dict, fileName: str):
     """
-    formatJSON = tableName + ".json"
+    Writes and creates a file with format json.
+    Args:
+        myDict (dict): A dictionary with the data of the json to create.
+        fileName (str): The name of the final File.
+    """
+    formatJSON = fileName + ".json"
 
     try:
-        print(f'Trying write the file {formatJSON}')
+        print(f'\nTrying write the file {formatJSON}')
         with open(formatJSON, 'w+') as jsonFile:
             jsonFile.write(json.dumps(myDict, sort_keys=True,
                                       indent=4, separators=(',', ':')))
             jsonFile.close()
             print('Success: Json file created!')
     except:
-        print('Error: The json could not be written')
+        print('\nError: The json could not be written')
 
 
 def writeCSV(myList: list, tableName: str):
-    """[summary]
-
+    """
+    Writes and creates a file with format csv.
     Args:
-        myList (list): [description]
-        tableName (str): [description]
+        myList (list): A list with all the registers inside.
+        tableName (str): Name of the table with all the registers to make the file.
     """
     formatCSV = tableName + ".csv"
 
     try:
-        print(f'Trying write the file {formatCSV}')
+        print(f'\nTrying write the file {formatCSV}')
         with open(formatCSV, 'w+') as csvFile:
             csvFile.write(str(myList))
             csvFile.close()
             print('Success: CSV file created!')
     except:
-        print('Error: The CSV could not be written')
+        print('\nError: The CSV could not be written')
 
 
 def sortFiles(exceptedFile: str, currentDir):
-    """[summary]
-
+    """ 
+    Moves the files with format json and csv (except the configuration's json) to two directories, one for all the json and the other for the csv.
     Args:
-        exceptedFile (str): [description]
-        currentDir ([type]): [description]
+        exceptedFile (str): File of tables's configuration (json)
+        currentDir ([type]): Current directory with the files.
     """
     try:
-        print(f'\Trying read files in {currentDir}.')
+        print(f'\nTrying read files in {currentDir}.')
         for filename in os.listdir(currentDir):
             if filename.endswith('.csv'):
                 directory = 'CSV_Files'
@@ -101,4 +104,4 @@ def sortFiles(exceptedFile: str, currentDir):
                 os.remove(filename)
                 print(f'Success: {filename} moved to {directory}.')
     except:
-        print(f'Effor: Reading of {currentDir} has failed.')
+        print(f'\nError: Reading of {currentDir} has failed.')

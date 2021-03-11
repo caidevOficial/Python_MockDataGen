@@ -17,18 +17,19 @@ import GetData_Mod.GetData as GD
 import FileHandle_Mod.FileHandle as FH
 import os
 
-# SETUP
+################################ SETUP AREA ################################
 scriptName = "DataMock Generator"
 version = "v2.8.1"
-filename = "file.json"
+filename = "file.json" # File with the configuration of the tables
 dirName = ""
 absDir = dirName + filename
 currentDir = os.path.dirname(os.path.realpath(__file__))
+################################ SETUP AREA ################################
 
 
 def dataMockGenerator():
-    """[summary]
-    Abre un json con la estructura de la tablas, genera la mock y lo guarda en csv, tmb guarda las pk de cada tabla en un json.
+    """
+    Creates Files in csv with the data generated and a Json with the tables and its pk values inside.
     """
 
     jsonRecord = {}
@@ -51,6 +52,6 @@ def dataMockGenerator():
         print("Error: Try to run again.")
 
 
-# Test
+################################# TEST AREA ################################
 if __name__ == "__main__":
     dataMockGenerator()
