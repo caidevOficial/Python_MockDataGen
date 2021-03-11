@@ -1,4 +1,4 @@
-<td><a href="https://polotic.misiones.gob.ar/" target="_blank"><img alt="PoloTic Misiones" src="https://github.com/caidevOficial/Logos/blob/master/Instituciones/polo_logo_2020.png" width="330px" height="112px" /></td></br>
+<td><a href="https://github.com/caidevOficial/" target="_blank"><img alt="PoloTic Misiones" src="https://github.com/caidevOficial/Logos/blob/master/Personales/Py_Poseidon_git.png" height="350px" /></td></br>
 
 # Python. 👨‍💻
 <a href="https://github.com/caidevOficial/PoloTic_FTPython">
