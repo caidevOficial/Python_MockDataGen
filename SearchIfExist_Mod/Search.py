@@ -17,6 +17,7 @@
 
 from FileHandle_Mod import FileHandle as FH
 
+
 def searchIfExist(jasonDictionary: dict, currentDir: str, dataSetName: str, dirNameJSONFiles: str, jsonFinalName: str) -> dict:
     """
     Tries to open a file with the name of the current directory and the name of the dataset. 

@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from FileHandle_Mod import printMessageS as PMS, printMessageD as PMD
+from FileHandle_Mod.FileHandle import printMessageS as PMS, printMessageD as PMD
 from faker import Faker as fk
 import random
 
@@ -38,19 +38,23 @@ def getRandomValueFaker(fakeType: str, fake: fk, listOfParameters: list):
 
         for i in range(len(listOfParameters)):
             if(len(listOfParameters) > 0):
-                if(str(type(listOfParameters[i] )) == "<class 'str'>" and listOfParameters[i].startswith('tuple')):
-                    tupleArray = listOfParameters[i].replace('tuple(', '').replace(')', '').split(',')
+                if(str(type(listOfParameters[i])) == "<class 'str'>" and listOfParameters[i].startswith('tuple')):
+                    tupleArray = listOfParameters[i].replace(
+                        'tuple(', '').replace(')', '').split(',')
                     listOfParameters[i] = tuple(tupleArray)
         if(len(listOfParameters) == 1):
             randomvalue = fakeFunc(listOfParameters[0])
         elif(len(listOfParameters) == 2):
             randomvalue = fakeFunc(listOfParameters[0], listOfParameters[1])
         elif(len(listOfParameters) == 3):
-            randomvalue = fakeFunc(listOfParameters[0], listOfParameters[1], listOfParameters[2])
+            randomvalue = fakeFunc(
+                listOfParameters[0], listOfParameters[1], listOfParameters[2])
         elif(len(listOfParameters) == 4):
-            randomvalue = fakeFunc(listOfParameters[0], listOfParameters[1], listOfParameters[2], listOfParameters[3])
+            randomvalue = fakeFunc(
+                listOfParameters[0], listOfParameters[1], listOfParameters[2], listOfParameters[3])
         elif(len(listOfParameters) == 5):
-            randomvalue = fakeFunc(listOfParameters[0], listOfParameters[1], listOfParameters[2], listOfParameters[3], listOfParameters[4])
+            randomvalue = fakeFunc(
+                listOfParameters[0], listOfParameters[1], listOfParameters[2], listOfParameters[3], listOfParameters[4])
         else:
             randomvalue = fakeFunc()
     except Exception as e:
@@ -78,7 +82,8 @@ def getAmountOfRegisters(TABLE_DATA_Fields: dict, tableName: str) -> int:
                 amountOfRegisters = listMetadata[index]["AmountOfRegisters"]
                 break
     except Exception as e:
-        PMD(f'\nError in obtaining the amount of registers.','The default value was set to {amountOfRegisters}')
+        PMD(f'\nError in obtaining the amount of registers.',
+            'The default value was set to {amountOfRegisters}')
         PMS(f'Exception: {e}')
     finally:
         return amountOfRegisters
@@ -100,9 +105,11 @@ def getRandomPkOrFk(listOfPk: dict, sourceTable: str, sourceField: str) -> str:
         listOfValues = listOfPk[sourceTable][sourceField]
         randomPk = random.choice(listOfValues)
     except:
-        PMD(f'Error getting the list of pk from the table {sourceTable}.', 'An empty list will be returned')
+        PMD(f'Error getting the list of pk from the table {sourceTable}.',
+            'An empty list will be returned')
     finally:
         return randomPk
+
 
 def createRecords(TABLE_FIELDS: list, tableName: str, amountOfRegisters: int, jsonVariable: dict):
     """
@@ -125,7 +132,8 @@ def createRecords(TABLE_FIELDS: list, tableName: str, amountOfRegisters: int, js
     jsonOfThisTable = {}
     fake = fk()
 
-    PMD(f'\nCreating registers for the table {tableName}', 'This action may taking a while...')
+    PMD(f'\nCreating registers for the table {tableName}',
+        'This action may taking a while...')
 
     for number in range(0, amountOfRegisters):
         try:
@@ -139,8 +147,9 @@ def createRecords(TABLE_FIELDS: list, tableName: str, amountOfRegisters: int, js
                     jsonOfThisTable[tableName] = {}
 
                 if('ispk' in element.keys()):
-                    uniqueID = fake.unique.bothify(element["format"], element["letters"])
-                    
+                    uniqueID = fake.unique.bothify(
+                        element["format"], element["letters"])
+
                     actualRecord.append(str(uniqueID))
                     pksOfThisTable.append(uniqueID)
                     columnName = element["name"]
@@ -157,30 +166,34 @@ def createRecords(TABLE_FIELDS: list, tableName: str, amountOfRegisters: int, js
                     fakeType = element["faketype"]
                     listOfParameters = []
                     if(fakeType == "bothify"):
-                        dataCell = fake.botify(element["format"], element["letters"])
+                        dataCell = fake.botify(
+                            element["format"], element["letters"])
                         actualRecord.append(str(dataCell))
 
                     elif ('parameters' in element.keys()):
                         listOfParameters = element["parameters"]
-                        actualRecord.append(getRandomValueFaker(fakeType, fake, listOfParameters))
+                        actualRecord.append(getRandomValueFaker(
+                            fakeType, fake, listOfParameters))
 
                 elif ('isfk' in element.keys()):
                     sourceTable = element["sourceTable"]
                     sourceField = element["sourceField"]
 
-                    randomPK = getRandomPkOrFk(jsonVariable, sourceTable, sourceField)
+                    randomPK = getRandomPkOrFk(
+                        jsonVariable, sourceTable, sourceField)
                     actualRecord.append(str(randomPK))
 
             tableRecords += ",".join(map(str, actualRecord)) + "\n"
             actualRecord.clear()
             jsonVariable.update(jsonOfThisTable)
-            counter +=1
+            counter += 1
 
             if counter == 5000:
                 PMS(f"## Registers Created: {number+1}")
                 counter = 0
         except Exception as e:
-            PMS(f'Error getting the list of values of the "Data" field of {tableName}')
+            PMS(
+                f'Error getting the list of values of the "Data" field of {tableName}')
             PMS(f'Exception: {e}')
         finally:
             PMS(f"## Total Registers Created: {number+1}")

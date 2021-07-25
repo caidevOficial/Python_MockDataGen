@@ -13,12 +13,14 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from time import time
-import GetData_Mod.GetData as GD
-import FileHandle_Mod.FileHandle as FH
-import SearchIfExist_Mod as SF
-from FileHandle_Mod.FileHandle import printMessageS as PMS, printMessageD as PMD
 import os
+from time import time
+
+import FileHandle_Mod.FileHandle as FH
+import SearchIfExist_Mod.Search as SF
+from FileHandle_Mod.FileHandle import printMessageD as PMD
+from FileHandle_Mod.FileHandle import printMessageS as PMS
+from GetData_Mod import GetData as GD
 
 ################################ SETUP AREA ################################
 configFile = FH.openFile('Configurations.json')
@@ -33,7 +35,7 @@ directoryToSaveJSON = configFile['Configurations']['Directory_To_Save_jsonFile']
 currentDir = os.path.dirname(os.path.realpath(__file__))
 absDir = jsonConfigTables
 scriptName = "DataMock Generator"
-version = "v3.0.4"
+version = "v3.0.41"
 ################################ SETUP AREA ################################
 
 
@@ -44,16 +46,22 @@ def dataMockGenerator() -> None:
     jsonRecord = {}
     dataMockRecord = []
     try:
-        jsonRecord = SF.searchIfExist(jsonRecord, currentDir, dataSetName, directoryToSaveJSON, jsonFinalName)
+        jsonRecord = SF.searchIfExist(
+            jsonRecord, currentDir, dataSetName, directoryToSaveJSON, jsonFinalName)
         TABLE_DATA_FIELDS = FH.openFile(absDir)
 
         for tableName in TABLE_DATA_FIELDS:
             if (not tableName in jsonRecord.keys()):
-                PMS(f"Obtaining the amount of registers for table: {tableName}")
-                amountOfRegisters = GD.getQtyRegisters(TABLE_DATA_FIELDS, tableName)
-                PMD(f"Registers for {tableName}: {amountOfRegisters}", f"Generating data for {tableName}")
-                PMD("This may taking a while, bassed on the","Amount of registers and amount of columns")
-                dataMockRecord, actualTableDictionary = GD.createRecords(TABLE_DATA_FIELDS, tableName, amountOfRegisters, jsonRecord)
+                PMS(
+                    f"Obtaining the amount of registers for table: {tableName}")
+                amountOfRegisters = GD.getQtyRegisters(
+                    TABLE_DATA_FIELDS, tableName)
+                PMD(f"Registers for {tableName}: {amountOfRegisters}",
+                    f"Generating data for {tableName}")
+                PMD("This may taking a while, bassed on the",
+                    "Amount of registers and amount of columns")
+                dataMockRecord, actualTableDictionary = GD.createRecords(
+                    TABLE_DATA_FIELDS, tableName, amountOfRegisters, jsonRecord)
                 jsonRecord = actualTableDictionary
 
             PMS(f"Creating CSV file for {tableName}")
@@ -63,7 +71,8 @@ def dataMockGenerator() -> None:
         FH.writeJSON(jsonRecord, 'Pks_Of_Tables')
 
         PMS("Moving Files...")
-        FH.sortFiles(jsonConfigTables, dataSetName, directoryToSaveCSV, directoryToSaveJSON, currentDir)
+        FH.sortFiles(jsonConfigTables, dataSetName,
+                     directoryToSaveCSV, directoryToSaveJSON, currentDir)
         PMS(f'\n{scriptName} - {version} Finished Successfully!.\n')
     except Exception as e:
         PMS("Error: Try to run again.")

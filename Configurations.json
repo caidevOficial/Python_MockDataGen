@@ -1,0 +1,9 @@
+{
+    "Configurations":{
+        "DatasetName":"MyDataset",
+        "DatasetFileToOpen":"MyDataset.json",
+        "NameOfDatasetToSaveInJson":"MyNewDataset.json",
+        "Directory_To_Save_csvFiles":"CSV_Files",
+        "Directory_To_Save_jsonFile":"JSON_Files"
+    }
+}
