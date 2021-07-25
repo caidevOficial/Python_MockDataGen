@@ -15,19 +15,22 @@
                 "mode": "NULLABLE",
                 "name": "name",
                 "type": "STRING",
-                "faketype": "name"
+                "faketype": "name",
+                "parameters": []
             },
             {
                 "mode": "NULLABLE",
                 "name": "country",
                 "type": "STRING",
-                "faketype": "country"
+                "faketype": "country",
+                "parameters": []
             },
             {
                 "mode": "NULLABLE",
                 "name": "city",
                 "type": "STRING",
-                "faketype": "city"
+                "faketype": "city",
+                "parameters": []
             }
         ]
     },
@@ -55,25 +58,29 @@
                 "mode": "NULLABLE",
                 "name": "about",
                 "type": "STRING",
-                "faketype": "sentence"
+                "faketype": "sentence",
+                "parameters": []
             },
             {
                 "mode": "NULLABLE",
                 "name": "name",
                 "type": "STRING",
-                "faketype": "name"
+                "faketype": "name",
+                "parameters": []
             },
             {
                 "mode": "NULLABLE",
                 "name": "country",
                 "type": "STRING",
-                "faketype": "country"
+                "faketype": "country",
+                "parameters": []
             },
             {
                 "mode": "NULLABLE",
                 "name": "amount",
                 "type": "STRING",
-                "faketype": "amount"
+                "faketype": "amount",
+                "parameters": []
             }
         ]
     },
@@ -109,19 +116,22 @@
                 "mode": "NULLABLE",
                 "name": "email",
                 "type": "STRING",
-                "faketype": "free_email"
+                "faketype": "free_email",
+                "parameters": []
             },
             {
                 "mode": "NULLABLE",
                 "name": "country",
                 "type": "STRING",
-                "faketype": "country"
+                "faketype": "country",
+                "parameters": []
             },
             {
                 "mode": "NULLABLE",
                 "name": "amount",
                 "type": "STRING",
-                "faketype": "amount"
+                "faketype": "amount",
+                "parameters": []
             }
         ]
     }

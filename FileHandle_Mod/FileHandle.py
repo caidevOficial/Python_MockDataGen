@@ -1,3 +1,5 @@
+# MIT License
+#
 # Copyright (C) 2021 <FacuFalcone - CaidevOficial>
 #
 # This program is free software: you can redistribute it and/or modify
@@ -17,8 +19,25 @@ import json
 import shutil
 import os
 
+def printMessageS(message: str) -> None:
+    """
+    Prints a formatted message, receiving a string as a parameter.
+    """
+    print("######################################################")
+    print(f'###     {message}')
+    print("######################################################\n")
 
-def openFile(abspath: str):
+def printMessageD(message1: str, message2: str) -> None:
+    """
+    Prints a formatted message, receiving two strings as a parameter.
+    """
+    print("######################################################")
+    print(f'###     {message1}')
+    print(f'###     {message2}')
+    print("######################################################\n")
+
+
+def openFile(abspath: str) -> dict:
     """[summary]
     Opens the file specified in 'abspath'.
     Args:
@@ -28,80 +47,86 @@ def openFile(abspath: str):
         [dict]: [The json parsed with the configuration of the tables inside.]
     """
     try:
-        print(f'\nTrying to open {abspath}')
+        printMessageS(f'Trying to open {abspath}')
         with open(abspath, 'r+') as schemafile:
             TABLE_FIELDS = json.load(schemafile)
             print("Success: File Opened!")
-    except:
+    except Exception as e:
         TABLE_FIELDS = {}
-        print(
-            f'\nError opening the file {abspath}, an empty dictionary will be returned.')
+        printMessageD(f'\nError opening the file {abspath}','An empty dictionary will be returned.')
+        printMessageS(f"\nException: {e}")
 
     return TABLE_FIELDS
 
 
-def writeJSON(myDict: dict, fileName: str):
+def writeJSON(myDict: dict, datasetName: str, jsonFileNameToSave: str) -> None:
     """
     Writes and creates a file with format json.
     Args:
         myDict (dict): A dictionary with the data of the json to create.
         fileName (str): The name of the final File.
     """
-    formatJSON = fileName + ".json"
+    formatJSON = f"{datasetName}.{jsonFileNameToSave}"
 
     try:
-        print(f'\nTrying write the file {formatJSON}')
+        printMessageS(f'Trying write the file {formatJSON}')
         with open(formatJSON, 'w+') as jsonFile:
-            jsonFile.write(json.dumps(myDict, sort_keys=True,
-                                      indent=4, separators=(',', ':')))
+            jsonFile.write(json.dumps(myDict, sort_keys=True, indent=4, separators=(',', ':')))
             jsonFile.close()
-            print('Success: Json file created!')
-    except:
-        print('\nError: The json could not be written')
+            printMessageS('Success: Json file created!')
+    except Exception as e:
+        printMessageS('\nError: The json could not be written')
+        printMessageS(f"\nException: {e}")
 
 
-def writeCSV(myList: list, tableName: str):
+def writeCSV(myList: list, datasetName: str, tableName: str) -> None:
     """
     Writes and creates a file with format csv.
     Args:
         myList (list): A list with all the registers inside.
         tableName (str): Name of the table with all the registers to make the file.
     """
-    formatCSV = tableName + ".csv"
+    formatCSV = f"{datasetName}.{tableName}.csv"
 
     try:
-        print(f'\nTrying write the file {formatCSV}')
+        printMessageS(f'Trying write the file {formatCSV}')
         with open(formatCSV, 'w+') as csvFile:
             csvFile.write(str(myList))
             csvFile.close()
-            print('Success: CSV file created!')
-    except:
-        print('\nError: The CSV could not be written')
+            printMessageS('Success: CSV file created!')
+    except Exception as e:
+        printMessageS('\nError: The CSV could not be written')
+        printMessageS(f"\nException: {e}")
 
 
-def sortFiles(exceptedFile: str, currentDir):
+def sortFiles(exceptedFile: str, datasetName: str,directoryOfCSV:str, directoryOfJson:str, currentDir:str) -> bool:
     """ 
     Moves the files with format json and csv (except the configuration's json) to two directories, one for all the json and the other for the csv.
     Args:
         exceptedFile (str): File of tables's configuration (json)
         currentDir ([type]): Current directory with the files.
     """
+    moveFiles = False
     try:
-        print(f'\nTrying read files in {currentDir}.')
+        printMessageS(f'Trying read files in {currentDir}.')
+
         for filename in os.listdir(currentDir):
             if filename.endswith('.csv'):
-                directory = 'CSV_Files'
+                directory = f'{datasetName}.{directoryOfCSV}'
                 if not os.path.exists(directory):
                     os.makedirs(directory)
-                shutil.copy(filename, directory)
-                os.remove(filename)
-                print(f'Success: {filename} moved to {directory}.')
-            elif not filename.startswith(exceptedFile) and filename.endswith('.json'):
-                directory = 'JSON_Files'
+                shutil.move(filename, directory)
+                printMessageS(f'Success: {filename} moved to {directory}.')
+
+            elif not filename.startswith(exceptedFile) and filename.endswith('.json') and not filename.startswith('Configurations'):
+                directory = f'{datasetName}.{directoryOfJson}'
                 if not os.path.exists(directory):
                     os.makedirs(directory)
-                shutil.copy(filename, directory)
-                os.remove(filename)
-                print(f'Success: {filename} moved to {directory}.')
-    except:
-        print(f'\nError: Reading of {currentDir} has failed.')
+                shutil.move(filename, directory)
+                printMessageS(f'Success: {filename} moved to {directory}.')
+                moveFiles = True
+    except Exception as e:
+        printMessageS(f'\nError: Reading of {currentDir} has failed.')
+        printMessageS(f"\nException: {e}")
+    finally:
+        return moveFiles
