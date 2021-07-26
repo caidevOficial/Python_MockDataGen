@@ -1,12 +1,36 @@
-<td><a href="https://github.com/caidevOficial/" target="_blank"><img alt="PoloTic Misiones" src="https://github.com/caidevOficial/Logos/blob/master/Personales/Py_Poseidon_git.png" height="350px" /></td></br>
+<table>
+  <tr>
+  <td><a href="https://github.com/caidevOficial/CSharp_UTN_LaboII/" target="_blank"><img alt="Universidad Tecnológica Nacional" src="https://github.com/caidevOficial/Logos/raw/master/Instituciones/logo-utn_black_white.png?raw=true" height="150px" /></td>
+  <td><img align="center" alt="Python" src="https://github.com/caidevOficial/Logos/blob/master/Lenguajes/py_logo1_1.png" width="150px" height="150px" /></td>
+  </tr>
+</table></br>
 
-# Python. 👨‍💻
-<a href="https://github.com/caidevOficial/PoloTic_FTPython">
-  <img align="center" src="https://github-readme-stats.vercel.app/api?username=caidevOficial&show_icons=true&theme=tokyonight&count_private=true&show_owner=true&count_private=true" />
-</a></br></br>
+
+---
+
+<p align="left"> <img src="https://komarev.com/ghpvc/?username=caidevoficial&label=Profile%20views&color=0e75b6&style=flat" alt="caidevoficial" /> </p>
+
+<p align="left"> <a href="https://github.com/CaidevOficial"><img src="https://github-profile-trophy.vercel.app/?username=caidevoficial&theme=nord&column=7" alt="caidevoficial" /></a> </p>
+
+---
+
+# C# exercises from UTN. 👨‍💻
+---
+
+<details>
+  <summary>:zap: GitHub Stats</summary>
+    <img align="center" src="https://github-readme-stats-caidevposeidon.vercel.app/api?username=caidevOficial&show_icons=true&theme=chartreuse-dark&count_private=true&show_owner=true&include_all_commits=true" /><br><br>
+</details>
+
+<details>
+    <summary>:zap: Most Used Languages</summary>
+    <img align="center" src="https://github-readme-stats-caidevposeidon.vercel.app/api/top-langs/?username=caidevOficial&layout=compact&theme=chartreuse-dark&langs_count=10&exclude_repo=Java_Lineage2_aCis_From_345&hide=html,css"/><br>
+</details>
+
+---
 
 ```python
-def upgradeFunction():
+def UpgradeFunction():
     message = "Upgrading my skills [Py Version!]"
     return message
 ```
@@ -16,10 +40,15 @@ def upgradeFunction():
 |--------|----------|
 
     
+---
+
 ## License 📄
-This project is under license [GNU GENERAL PUBLIC LICENSE v3.0] - read the file [LICENSE.md](LICENSE) for details.
+This project is under license \[MIT License\] - read the file [LICENSE.md](LICENSE) for details.
+
+---
 
 ## Where to find me: 🌎
+
 | <img class="circular" alt="Facu" src="https://avatars1.githubusercontent.com/u/12877139?s=400&u=d369ee24466653d9bbeeb9654930e3ff1c67b76a&v=4" width="80px" height="80px" />||
 |:----:|:----:|
 |🤴 Facu Falcone|<center>Junior Developer</center>|
