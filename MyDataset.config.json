@@ -1,7 +1,7 @@
 {
     "First_Table": {
         "MetaData": [{
-            "AmountOfRegisters": 20000
+            "AmountOfRegisters": 15000
         }],
         "Data": [{
                 "mode": "NULLABLE",
@@ -36,7 +36,7 @@
     },
     "Second_Table": {
         "MetaData": [{
-            "AmountOfRegisters": 20000
+            "AmountOfRegisters": 15000
         }],
         "Data": [{
                 "mode": "NULLABLE",
@@ -86,7 +86,7 @@
     },
     "Third_Table": {
         "MetaData": [{
-            "AmountOfRegisters": 20000
+            "AmountOfRegisters": 15000
         }],
         "Data": [{
                 "mode": "NULLABLE",

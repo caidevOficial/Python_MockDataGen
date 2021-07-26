@@ -15,9 +15,11 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from FileHandle_Mod.FileHandle import SingleMessage as PMS, DoubleMessage as PMD
-from faker import Faker as fk
 import random
+
+from faker import Faker as fk
+from FileHandle_Mod.FileHandle import DoubleMessage as PMD
+from FileHandle_Mod.FileHandle import SingleMessage as PMS
 
 
 def GetRandomValueFaker(fakeType: str, fake: fk, listOfParameters: list):
@@ -110,6 +112,25 @@ def GetRandomPkOrFk(listOfPk: dict, sourceTable: str, sourceField: str) -> str:
     finally:
         return randomPk
 
+def GetColumnsNames(TABLE_FIELDS: list) -> str:
+    """[summary]
+    Gets the name of the columns of a table.
+    Args:
+        TABLE_FIELDS (list): [List of fields of the table to search]
+
+    Returns:
+        str: [Returns the name of the columns]
+    """
+    try:
+        columnsNames = ""
+        for index in range(0, len(TABLE_FIELDS)):
+            columnsNames+= ",".join(map(str, TABLE_FIELDS[index]["name"]))
+        columnsNames+= "\n"
+    except Exception as e:
+        PMS(f'Error in the function GetColumnsNames. Error: {e}')
+    finally:
+        return columnsNames
+
 
 def CreateRecords(TABLE_FIELDS: list, tableName: str, amountOfRegisters: int, jsonVariable: dict):
     """
@@ -125,7 +146,7 @@ def CreateRecords(TABLE_FIELDS: list, tableName: str, amountOfRegisters: int, js
         dict: A dictionary with the table and its pks values.
     """
 
-    tableRecords = "\n"
+    tableRecords = ""
     actualRecord = []
     listOfValues = []
     pksOfThisTable = []
@@ -137,6 +158,8 @@ def CreateRecords(TABLE_FIELDS: list, tableName: str, amountOfRegisters: int, js
 
     try:
         counter = 0
+        tableRecords = GetColumnsNames(TABLE_FIELDS)
+
         for number in range(0, amountOfRegisters):
             listOfValues = TABLE_FIELDS[tableName]["Data"]
 
@@ -147,8 +170,7 @@ def CreateRecords(TABLE_FIELDS: list, tableName: str, amountOfRegisters: int, js
                     jsonOfThisTable[tableName] = {}
 
                 if('ispk' in element.keys()):
-                    uniqueID = fake.unique.bothify(
-                        element["format"], element["letters"])
+                    uniqueID = fake.unique.bothify(element["format"], element["letters"])
 
                     actualRecord.append(str(uniqueID))
                     pksOfThisTable.append(uniqueID)
