@@ -37,7 +37,7 @@ directoryToSaveJSON = configFile['Configurations']['Directory_To_Save_jsonFile']
 currentDir = os.path.dirname(os.path.realpath(__file__))
 absDir = jsonConfigTables
 scriptName = "DataMock Generator"
-version = "v3.0.44"
+version = "v3.0.5"
 ################################ SETUP AREA ################################
 
 
@@ -49,18 +49,18 @@ def MockDataGenerator() -> None:
     dataMockRecord = []
     try:
         jsonRecord = SF.SearchIfExist(jsonRecord, currentDir, dataSetName, directoryToSaveJSON, jsonFinalName)
-        TABLE_DATA_FIELDS = FH.OpenFile(absDir)
+        JSON_ALL_TABLES = FH.OpenFile(absDir)
 
-        for tableName in TABLE_DATA_FIELDS:
+        for tableName in JSON_ALL_TABLES:
             if (not tableName in jsonRecord.keys()):
                 PMS(
                     f"Obtaining the amount of registers for table: {tableName}")
-                amountOfRegisters = GD.GetAmountOfRegisters(TABLE_DATA_FIELDS, tableName)
+                amountOfRegisters = GD.GetAmountOfRegisters(JSON_ALL_TABLES, tableName)
                 PMD(f"Registers for {tableName}: {amountOfRegisters}",
                     f"Generating data for {tableName}")
                 PMD("This may taking a while, bassed on the",
                     "Amount of registers and amount of columns")
-                dataMockRecord, actualTableDictionary = GD.CreateRecords(TABLE_DATA_FIELDS, tableName, amountOfRegisters, jsonRecord)
+                dataMockRecord, actualTableDictionary = GD.CreateRecords(JSON_ALL_TABLES, tableName, amountOfRegisters, jsonRecord)
                 jsonRecord = actualTableDictionary
 
             PMS(f"Creating CSV file for {tableName}")

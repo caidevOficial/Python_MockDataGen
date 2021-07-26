@@ -46,6 +46,12 @@ def GetRandomValueFaker(fakeType: str, fake: fk, listOfParameters: list):
                     listOfParameters[i] = tuple(tupleArray)
         if(len(listOfParameters) == 1):
             randomvalue = fakeFunc(listOfParameters[0])
+        #elif(len(listOfParameters) > 2):
+        #    args = None
+        #    for i in range(len(listOfParameters)):
+        #        args+= listOfParameters[i]
+        #    randomvalue = fakeFunc(*args)
+
         elif(len(listOfParameters) == 2):
             randomvalue = fakeFunc(listOfParameters[0], listOfParameters[1])
         elif(len(listOfParameters) == 3):
@@ -66,11 +72,11 @@ def GetRandomValueFaker(fakeType: str, fake: fk, listOfParameters: list):
         return randomvalue
 
 
-def GetAmountOfRegisters(TABLE_DATA_Fields: dict, tableName: str) -> int:
+def GetAmountOfRegisters(JSON_ALL_TABLES: dict, tableName: str) -> int:
     """
     Obtains the amount of registers from the config json.
     Args:
-        TABLE_DATA_Fields (dict): A dictionary with all the configs of the tables.
+        JSON_ALL_TABLES (dict): A dictionary with all the tables and its configs.
         tableName (str): The name of the table to search the value.
 
     Returns:
@@ -78,7 +84,7 @@ def GetAmountOfRegisters(TABLE_DATA_Fields: dict, tableName: str) -> int:
     """
     amountOfRegisters = 1000
     try:
-        listMetadata = TABLE_DATA_Fields[tableName]["MetaData"]
+        listMetadata = JSON_ALL_TABLES[tableName]["MetaData"]
         for index in range(0, len(listMetadata)):
             if("AmountOfRegisters" in listMetadata[index]):
                 amountOfRegisters = listMetadata[index]["AmountOfRegisters"]
@@ -112,19 +118,25 @@ def GetRandomPkOrFk(listOfPk: dict, sourceTable: str, sourceField: str) -> str:
     finally:
         return randomPk
 
-def GetColumnsNames(TABLE_FIELDS: list) -> str:
+def GetColumnsNames(JSON_ALL_TABLES: dict, tableName:str) -> str:
     """[summary]
     Gets the name of the columns of a table.
     Args:
-        TABLE_FIELDS (list): [List of fields of the table to search]
+        JSON_ALL_TABLES (dict): [List of fields of the table to search]
 
     Returns:
         str: [Returns the name of the columns]
     """
     try:
+        columnsListOfDictionary = JSON_ALL_TABLES[tableName]["Data"]
         columnsNames = ""
-        for index in range(0, len(TABLE_FIELDS)):
-            columnsNames+= ",".join(map(str, TABLE_FIELDS[index]["name"]))
+        if(len(columnsListOfDictionary) > 0):
+            for index in range(0, len(columnsListOfDictionary)):
+                if(index == 0):
+                    columnsNames = columnsListOfDictionary[index]["name"]
+                else:
+                    columnsNames = columnsNames + "," + columnsListOfDictionary[index]["name"]
+        
         columnsNames+= "\n"
     except Exception as e:
         PMS(f'Error in the function GetColumnsNames. Error: {e}')
@@ -132,11 +144,11 @@ def GetColumnsNames(TABLE_FIELDS: list) -> str:
         return columnsNames
 
 
-def CreateRecords(TABLE_FIELDS: list, tableName: str, amountOfRegisters: int, jsonVariable: dict):
+def CreateRecords(JSON_ALL_TABLES: dict, tableName: str, amountOfRegisters: int, jsonVariable: dict):
     """
     Creates 'amountOfRegisters' registers for the table 'tableName'.
     Args:
-        TABLE_FIELDS (list): The variable with the configuration of the tables.
+        JSON_ALL_TABLES (dict): The variable with the configuration of the tables.
         tableName (str): The name of the actual table to create the registers.
         amountOfRegisters (int): The amount of registers.
         jsonVariable (dict): The variable with the structure of the tables with theirs pk inside.
@@ -158,10 +170,10 @@ def CreateRecords(TABLE_FIELDS: list, tableName: str, amountOfRegisters: int, js
 
     try:
         counter = 0
-        tableRecords = GetColumnsNames(TABLE_FIELDS)
+        tableRecords = GetColumnsNames(JSON_ALL_TABLES, tableName)
 
         for number in range(0, amountOfRegisters):
-            listOfValues = TABLE_FIELDS[tableName]["Data"]
+            listOfValues = JSON_ALL_TABLES[tableName]["Data"]
 
             for element in listOfValues:
                 values = []

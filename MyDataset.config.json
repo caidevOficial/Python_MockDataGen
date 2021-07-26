@@ -1,14 +1,14 @@
 {
     "First_Table": {
         "MetaData": [{
-            "AmountOfRegisters": 15000
+            "AmountOfRegisters": 11000
         }],
         "Data": [{
                 "mode": "NULLABLE",
-                "name": "id_1",
+                "name": "id_Table_1_pk",
                 "type": "STRING",
                 "ispk": "true",
-                "format": "????##",
+                "format": "????##??##",
                 "letters": "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
             },
             {
@@ -27,10 +27,12 @@
             },
             {
                 "mode": "NULLABLE",
-                "name": "city",
+                "name": "amount",
                 "type": "STRING",
-                "faketype": "city",
-                "parameters": []
+                "faketype": "pyfloat",
+                "parameters": [
+                    2,2,true,10,50
+                ]
             }
         ]
     },
@@ -40,10 +42,10 @@
         }],
         "Data": [{
                 "mode": "NULLABLE",
-                "name": "id_1",
+                "name": "id_Table_2_pk",
                 "type": "STRING",
                 "ispk": "true",
-                "format": "????##",
+                "format": "??????##",
                 "letters": "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
             },
             {
@@ -86,11 +88,11 @@
     },
     "Third_Table": {
         "MetaData": [{
-            "AmountOfRegisters": 15000
+            "AmountOfRegisters": 22000
         }],
         "Data": [{
                 "mode": "NULLABLE",
-                "name": "id_1",
+                "name": "id_Table_3_pk",
                 "type": "STRING",
                 "ispk": "true",
                 "format": "????##",
@@ -98,19 +100,19 @@
             },
             {
                 "mode": "NULLABLE",
-                "name": "id_1_T1",
+                "name": "id_Table_1_pk_fk",
                 "type": "STRING",
                 "isfk": "true",
                 "sourceTable": "First_Table",
-                "sourceField": "id_1"
+                "sourceField": "id_Table_1_pk"
             },
             {
                 "mode": "NULLABLE",
-                "name": "id_2_T2",
+                "name": "id_Table_2_pk_fk",
                 "type": "STRING",
                 "isfk": "true",
                 "sourceTable": "Second_Table",
-                "sourceField": "id_2"
+                "sourceField": "id_Table_2_pk"
             },
             {
                 "mode": "NULLABLE",
