@@ -1,10 +1,9 @@
 <table>
   <tr>
-  <td><a href="https://github.com/caidevOficial/CSharp_UTN_LaboII/" target="_blank"><img alt="Universidad Tecnológica Nacional" src="https://github.com/caidevOficial/Logos/raw/master/Instituciones/logo-utn_black_white.png?raw=true" height="150px" /></td>
-  <td><img align="center" alt="Python" src="https://github.com/caidevOficial/Logos/blob/master/Lenguajes/py_logo1_1.png" width="150px" height="150px" /></td>
+  <td><a href="https://github.com/caidevOficial/CSharp_UTN_LaboII/" target="_blank"><img alt="Universidad Tecnológica Nacional" src="https://github.com/caidevOficial/Logos/blob/master/Personales/Py_McFly_git.png?raw=true" height="250px" /></td>
+  <td><img align="center" alt="Python" src="https://github.com/caidevOficial/Logos/blob/master/Lenguajes/py_logo1_1.png?raw=true" width="250px" height="250px" /></td>
   </tr>
 </table></br>
-
 
 ---
 
@@ -14,7 +13,7 @@
 
 ---
 
-# C# exercises from UTN. 👨‍💻
+# MockData Generator in Python. 👨‍💻
 ---
 
 <details>
@@ -36,7 +35,7 @@ def UpgradeFunction():
 ```
 
 ## Technologies used. 📌
-|<a href="https://www.python.org/downloads/"><img align="center" alt="Pyhton" src="https://github.com/caidevOficial/Logos/blob/master/Lenguajes/py_logo1_1.png" width="50px" height="50px" />|<h3>Python</h3>|
+|<a href="https://www.python.org/downloads/"><img align="center" alt="Pyhton" src="https://github.com/caidevOficial/Logos/blob/master/Lenguajes/py_logo1_1.png?raw=true" width="50px" height="50px" />|<h3>Python</h3>|
 |--------|----------|
 
     
