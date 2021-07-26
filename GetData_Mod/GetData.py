@@ -15,12 +15,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from FileHandle_Mod.FileHandle import printMessageS as PMS, printMessageD as PMD
+from FileHandle_Mod.FileHandle import SingleMessage as PMS, DoubleMessage as PMD
 from faker import Faker as fk
 import random
 
 
-def getRandomValueFaker(fakeType: str, fake: fk, listOfParameters: list):
+def GetRandomValueFaker(fakeType: str, fake: fk, listOfParameters: list):
     """
     Simulates a switch, only used for Faker class.
     Args:
@@ -64,7 +64,7 @@ def getRandomValueFaker(fakeType: str, fake: fk, listOfParameters: list):
         return randomvalue
 
 
-def getAmountOfRegisters(TABLE_DATA_Fields: dict, tableName: str) -> int:
+def GetAmountOfRegisters(TABLE_DATA_Fields: dict, tableName: str) -> int:
     """
     Obtains the amount of registers from the config json.
     Args:
@@ -89,7 +89,7 @@ def getAmountOfRegisters(TABLE_DATA_Fields: dict, tableName: str) -> int:
         return amountOfRegisters
 
 
-def getRandomPkOrFk(listOfPk: dict, sourceTable: str, sourceField: str) -> str:
+def GetRandomPkOrFk(listOfPk: dict, sourceTable: str, sourceField: str) -> str:
     """
     Obtains a random number from the list of pk of the table 'sourceTable'.
     Args:
@@ -111,7 +111,7 @@ def getRandomPkOrFk(listOfPk: dict, sourceTable: str, sourceField: str) -> str:
         return randomPk
 
 
-def createRecords(TABLE_FIELDS: list, tableName: str, amountOfRegisters: int, jsonVariable: dict):
+def CreateRecords(TABLE_FIELDS: list, tableName: str, amountOfRegisters: int, jsonVariable: dict):
     """
     Creates 'amountOfRegisters' registers for the table 'tableName'.
     Args:
@@ -136,8 +136,8 @@ def createRecords(TABLE_FIELDS: list, tableName: str, amountOfRegisters: int, js
         'This action may taking a while...')
 
     try:
+        counter = 0
         for number in range(0, amountOfRegisters):
-            counter = 0
             listOfValues = TABLE_FIELDS[tableName]["Data"]
 
             for element in listOfValues:
@@ -172,18 +172,17 @@ def createRecords(TABLE_FIELDS: list, tableName: str, amountOfRegisters: int, js
 
                     elif ('parameters' in element.keys()):
                         listOfParameters = element["parameters"]
-                        actualRecord.append(getRandomValueFaker(
-                            fakeType, fake, listOfParameters))
+                        actualRecord.append(GetRandomValueFaker(fakeType, fake, listOfParameters))
 
                 elif ('isfk' in element.keys()):
                     sourceTable = element["sourceTable"]
                     sourceField = element["sourceField"]
 
-                    randomPK = getRandomPkOrFk(
+                    randomPK = GetRandomPkOrFk(
                         jsonVariable, sourceTable, sourceField)
                     actualRecord.append(str(randomPK))
 
-            tableRecords += ",".join(map(str, actualRecord)) + "\n"
+            tableRecords += ",".join(map(str, actualRecord))+"\n"
             actualRecord.clear()
             jsonVariable.update(jsonOfThisTable)
             counter += 1
@@ -192,8 +191,7 @@ def createRecords(TABLE_FIELDS: list, tableName: str, amountOfRegisters: int, js
                 PMS(f"## Registers Created: {number+1}")
                 counter = 0
     except Exception as e:
-        PMS(
-            f'Error getting the list of values of the "Data" field of {tableName}')
+        PMS(f'Error getting the list of values of the "Data" field of {tableName}')
         PMS(f'Exception: {e}')
     finally:
         PMS(f"## Total Registers Created: {number+1}")

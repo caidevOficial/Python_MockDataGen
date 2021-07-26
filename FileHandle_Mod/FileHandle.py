@@ -19,7 +19,7 @@ import json
 import shutil
 import os
 
-def printMessageS(message: str) -> None:
+def SingleMessage(message: str) -> None:
     """[summary]
     Prints a formatted message, receiving a string as a parameter.
     Args:
@@ -29,7 +29,7 @@ def printMessageS(message: str) -> None:
     print(f'###     {message}')
     print("######################################################\n")
 
-def printMessageD(message1: str, message2: str) -> None:
+def DoubleMessage(message1: str, message2: str) -> None:
     """[summary]
     Prints a formatted message, receiving two strings as a parameter.
     Args:
@@ -42,7 +42,7 @@ def printMessageD(message1: str, message2: str) -> None:
     print("######################################################\n")
 
 
-def openFile(abspath: str) -> dict:
+def OpenFile(abspath: str) -> dict:
     """[summary]
     Opens the file specified in 'abspath'.
     Args:
@@ -52,19 +52,19 @@ def openFile(abspath: str) -> dict:
         [dict]: [The json parsed with the configuration of the tables inside.]
     """
     try:
-        printMessageS(f'Trying to open {abspath}')
+        SingleMessage(f'Trying to open {abspath}')
         with open(abspath, 'r+') as schemafile:
             TABLE_FIELDS = json.load(schemafile)
             print("Success: File Opened!")
     except Exception as e:
         TABLE_FIELDS = {}
-        printMessageD(f'\nError opening the file {abspath}','An empty dictionary will be returned.')
-        printMessageS(f"\nException: {e}")
+        DoubleMessage(f'\nError opening the file {abspath}','An empty dictionary will be returned.')
+        SingleMessage(f"\nException: {e}")
 
     return TABLE_FIELDS
 
 
-def writeJSON(myDict: dict, datasetName: str, jsonFileNameToSave: str) -> None:
+def WriteJSON(myDict: dict, datasetName: str, jsonFileNameToSave: str) -> None:
     """
     Writes and creates a file with format json.
     Args:
@@ -74,17 +74,17 @@ def writeJSON(myDict: dict, datasetName: str, jsonFileNameToSave: str) -> None:
     formatJSON = f"{datasetName}.{jsonFileNameToSave}"
 
     try:
-        printMessageS(f'Trying write the file {formatJSON}')
+        SingleMessage(f'Trying write the file {formatJSON}')
         with open(formatJSON, 'w+') as jsonFile:
             jsonFile.write(json.dumps(myDict, sort_keys=True, indent=4, separators=(',', ':')))
             jsonFile.close()
-            printMessageS('Success: Json file created!')
+            SingleMessage('Success: Json file created!')
     except Exception as e:
-        printMessageS('\nError: The json could not be written')
-        printMessageS(f"\nException: {e}")
+        SingleMessage('\nError: The json could not be written')
+        SingleMessage(f"\nException: {e}")
 
 
-def writeCSV(myList: list, datasetName: str, tableName: str) -> None:
+def WriteCSV(myList: list, datasetName: str, tableName: str) -> None:
     """
     Writes and creates a file with format csv.
     Args:
@@ -94,17 +94,17 @@ def writeCSV(myList: list, datasetName: str, tableName: str) -> None:
     formatCSV = f"{datasetName}.{tableName}.csv"
 
     try:
-        printMessageS(f'Trying write the file {formatCSV}')
+        SingleMessage(f'Trying write the file {formatCSV}')
         with open(formatCSV, 'w+') as csvFile:
             csvFile.write(str(myList))
             csvFile.close()
-            printMessageS('Success: CSV file created!')
+            SingleMessage('Success: CSV file created!')
     except Exception as e:
-        printMessageS('\nError: The CSV could not be written')
-        printMessageS(f"\nException: {e}")
+        SingleMessage('\nError: The CSV could not be written')
+        SingleMessage(f"\nException: {e}")
 
 
-def sortFiles(exceptedFile: str, datasetName: str,directoryOfCSV:str, directoryOfJson:str, currentDir:str) -> bool:
+def SortFiles(exceptedFile: str, datasetName: str,directoryOfCSV:str, directoryOfJson:str, currentDir:str) -> bool:
     """ 
     Moves the files with format json and csv (except the configuration's json) to two directories, one for all the json and the other for the csv.
     Args:
@@ -113,7 +113,7 @@ def sortFiles(exceptedFile: str, datasetName: str,directoryOfCSV:str, directoryO
     """
     moveFiles = False
     try:
-        printMessageS(f'Trying read files in {currentDir}.')
+        SingleMessage(f'Trying read files in {currentDir}.')
 
         for filename in os.listdir(currentDir):
             if filename.endswith('.csv'):
@@ -121,17 +121,17 @@ def sortFiles(exceptedFile: str, datasetName: str,directoryOfCSV:str, directoryO
                 if not os.path.exists(directory):
                     os.makedirs(directory)
                 shutil.move(filename, directory)
-                printMessageS(f'Success: {filename} moved to {directory}.')
+                SingleMessage(f'Success: {filename} moved to {directory}.')
 
             if not filename.startswith(exceptedFile) and filename.endswith('.json') and (not filename.startswith('Configurations')):
                 directory = f'{datasetName}.{directoryOfJson}'
                 if not os.path.exists(directory):
                     os.makedirs(directory)
                 shutil.move(filename, directory)
-                printMessageS(f'Success: {filename} moved to {directory}.')
+                SingleMessage(f'Success: {filename} moved to {directory}.')
                 moveFiles = True
     except Exception as e:
-        printMessageS(f'\nError: Reading of {currentDir} has failed.')
-        printMessageS(f"\nException: {e}")
+        SingleMessage(f'\nError: Reading of {currentDir} has failed.')
+        SingleMessage(f"\nException: {e}")
     finally:
         return moveFiles
