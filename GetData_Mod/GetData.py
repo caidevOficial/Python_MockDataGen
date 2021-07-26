@@ -78,7 +78,7 @@ def getAmountOfRegisters(TABLE_DATA_Fields: dict, tableName: str) -> int:
     try:
         listMetadata = TABLE_DATA_Fields[tableName]["MetaData"]
         for index in range(0, len(listMetadata)):
-            if("RegisterQtty" in listMetadata[index]):
+            if("AmountOfRegisters" in listMetadata[index]):
                 amountOfRegisters = listMetadata[index]["AmountOfRegisters"]
                 break
     except Exception as e:
@@ -132,11 +132,11 @@ def createRecords(TABLE_FIELDS: list, tableName: str, amountOfRegisters: int, js
     jsonOfThisTable = {}
     fake = fk()
 
-    PMD(f'\nCreating registers for the table {tableName}',
+    PMD(f'Creating registers for the table {tableName}',
         'This action may taking a while...')
 
-    for number in range(0, amountOfRegisters):
-        try:
+    try:
+        for number in range(0, amountOfRegisters):
             counter = 0
             listOfValues = TABLE_FIELDS[tableName]["Data"]
 
@@ -191,10 +191,10 @@ def createRecords(TABLE_FIELDS: list, tableName: str, amountOfRegisters: int, js
             if counter == 5000:
                 PMS(f"## Registers Created: {number+1}")
                 counter = 0
-        except Exception as e:
-            PMS(
-                f'Error getting the list of values of the "Data" field of {tableName}')
-            PMS(f'Exception: {e}')
-        finally:
-            PMS(f"## Total Registers Created: {number+1}")
-            return tableRecords, jsonVariable
+    except Exception as e:
+        PMS(
+            f'Error getting the list of values of the "Data" field of {tableName}')
+        PMS(f'Exception: {e}')
+    finally:
+        PMS(f"## Total Registers Created: {number+1}")
+        return tableRecords, jsonVariable

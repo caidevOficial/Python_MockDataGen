@@ -20,16 +20,21 @@ import shutil
 import os
 
 def printMessageS(message: str) -> None:
-    """
+    """[summary]
     Prints a formatted message, receiving a string as a parameter.
+    Args:
+        message (str): [Message to show in the console.]
     """
     print("######################################################")
     print(f'###     {message}')
     print("######################################################\n")
 
 def printMessageD(message1: str, message2: str) -> None:
-    """
+    """[summary]
     Prints a formatted message, receiving two strings as a parameter.
+    Args:
+        message1 (str): [First Message to show in the console.]
+        message2 (str): [Second Message to show in the console.]
     """
     print("######################################################")
     print(f'###     {message1}')
@@ -118,7 +123,7 @@ def sortFiles(exceptedFile: str, datasetName: str,directoryOfCSV:str, directoryO
                 shutil.move(filename, directory)
                 printMessageS(f'Success: {filename} moved to {directory}.')
 
-            elif not filename.startswith(exceptedFile) and filename.endswith('.json') and not filename.startswith('Configurations'):
+            if not filename.startswith(exceptedFile) and filename.endswith('.json') and (not filename.startswith('Configurations')):
                 directory = f'{datasetName}.{directoryOfJson}'
                 if not os.path.exists(directory):
                     os.makedirs(directory)

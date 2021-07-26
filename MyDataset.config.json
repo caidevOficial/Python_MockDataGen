@@ -1,7 +1,7 @@
 {
     "First_Table": {
         "MetaData": [{
-            "AmountOfRegisters": 16
+            "AmountOfRegisters": 20000
         }],
         "Data": [{
                 "mode": "NULLABLE",
@@ -36,7 +36,7 @@
     },
     "Second_Table": {
         "MetaData": [{
-            "AmountOfRegisters": 28
+            "AmountOfRegisters": 20000
         }],
         "Data": [{
                 "mode": "NULLABLE",
@@ -79,14 +79,14 @@
                 "mode": "NULLABLE",
                 "name": "amount",
                 "type": "STRING",
-                "faketype": "amount",
+                "faketype": "city",
                 "parameters": []
             }
         ]
     },
     "Third_Table": {
         "MetaData": [{
-            "AmountOfRegisters": 45
+            "AmountOfRegisters": 20000
         }],
         "Data": [{
                 "mode": "NULLABLE",
@@ -130,7 +130,7 @@
                 "mode": "NULLABLE",
                 "name": "amount",
                 "type": "STRING",
-                "faketype": "amount",
+                "faketype": "city",
                 "parameters": []
             }
         ]

@@ -1,3 +1,5 @@
+# MIT License
+#
 # Copyright (C) 2021 <FacuFalcone - CaidevOficial>
 #
 # This program is free software: you can redistribute it and/or modify
@@ -35,12 +37,12 @@ directoryToSaveJSON = configFile['Configurations']['Directory_To_Save_jsonFile']
 currentDir = os.path.dirname(os.path.realpath(__file__))
 absDir = jsonConfigTables
 scriptName = "DataMock Generator"
-version = "v3.0.41"
+version = "v3.0.42"
 ################################ SETUP AREA ################################
 
 
 def dataMockGenerator() -> None:
-    """
+    """[summary]
     Creates Files in csv with the data generated and a Json with the tables and its pk values inside.
     """
     jsonRecord = {}
@@ -54,7 +56,7 @@ def dataMockGenerator() -> None:
             if (not tableName in jsonRecord.keys()):
                 PMS(
                     f"Obtaining the amount of registers for table: {tableName}")
-                amountOfRegisters = GD.getQtyRegisters(
+                amountOfRegisters = GD.getAmountOfRegisters(
                     TABLE_DATA_FIELDS, tableName)
                 PMD(f"Registers for {tableName}: {amountOfRegisters}",
                     f"Generating data for {tableName}")
@@ -65,15 +67,15 @@ def dataMockGenerator() -> None:
                 jsonRecord = actualTableDictionary
 
             PMS(f"Creating CSV file for {tableName}")
-            FH.writeCSV(dataMockRecord, tableName)
+            FH.writeCSV(dataMockRecord, dataSetName, tableName)
 
         PMS(f"Creating JSON file for {dataSetName}")
-        FH.writeJSON(jsonRecord, 'Pks_Of_Tables')
+        FH.writeJSON(jsonRecord, dataSetName, jsonFinalName)
 
         PMS("Moving Files...")
         FH.sortFiles(jsonConfigTables, dataSetName,
                      directoryToSaveCSV, directoryToSaveJSON, currentDir)
-        PMS(f'\n{scriptName} - {version} Finished Successfully!.\n')
+        PMS(f'{scriptName} - {version} Finished Successfully!.')
     except Exception as e:
         PMS("Error: Try to run again.")
         PMS(f"Exception: {e}")

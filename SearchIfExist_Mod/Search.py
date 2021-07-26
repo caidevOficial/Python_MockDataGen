@@ -17,16 +17,25 @@
 
 from FileHandle_Mod import FileHandle as FH
 
-
 def searchIfExist(jasonDictionary: dict, currentDir: str, dataSetName: str, dirNameJSONFiles: str, jsonFinalName: str) -> dict:
-    """
+    """[summary]
     Tries to open a file with the name of the current directory and the name of the dataset. 
     If not exist, returns an empty dictionary.
+    Args:
+        jasonDictionary (dict): [Dictionary to be updated with the data from the file]
+        currentDir (str): [Current directory of the executable]
+        dataSetName (str): [First Part of the name of the folder/file that contains the JSON files]
+        dirNameJSONFiles (str): [Second Part of the name of the folder that contains the JSON files]
+        jsonFinalName (str): [Second part of the name of the JSON file that contains the data]
+
+    Returns:
+        dict: [An empty dictionary if fails to open the file, otherwise, the dictionary is returned]
     """
     try:
         searchExistantJson = f"{currentDir}\\{dataSetName}.{dirNameJSONFiles}\\{dataSetName}.{jsonFinalName}"
-        searchExistantJson = FH.openFile(searchExistantJson)
-    except FileNotFoundError:
-        print("File not found")
+        jasonDictionary = FH.openFile(searchExistantJson)
+    except FileNotFoundError as e:
+        FH.printMessageS("File not found")
+        print(f"Exception: {e}")
     finally:
         return jasonDictionary
