@@ -1,7 +1,7 @@
 <table>
     <tr>
         <td>
-            <a href="Readme.md">⬅️ Back</a>
+            <a href="README.md">⬅️ Back</a>
         </td>
     </tr>
 </table>
@@ -222,7 +222,7 @@ For more information, you can visit the official website of [Faker](https://fake
 <table>
     <tr>
         <td>
-            <a href="Readme.md">⬅️ Back</a>
+            <a href="README.md">⬅️ Back</a>
         </td>
         <td>
             <a href="https://faker.readthedocs.io/en/master/providers.html" target="_blank">➡️ Go to Faker WebPage</a>
