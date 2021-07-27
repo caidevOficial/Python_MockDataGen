@@ -23,6 +23,7 @@ import SearchIfExist_Mod.Search as SF
 from FileHandle_Mod.FileHandle import DoubleMessage as PMD
 from FileHandle_Mod.FileHandle import SingleMessage as PMS
 from GetData_Mod import GetData as GD
+from CreateRegisters_Mod.DataCreation import CreateRegisterForCSV as CSV, CreateRegisterForSQL as SQL
 
 ################################ SETUP AREA ################################
 configFile = FH.OpenFile('Configurations.json')
@@ -32,12 +33,14 @@ jsonConfigTables = configFile['Configurations']['DatasetFileToOpen']
 jsonFinalName = configFile['Configurations']['NameOfDatasetToSaveInJson']
 
 directoryToSaveCSV = configFile['Configurations']['Directory_To_Save_csvFiles']
-directoryToSaveJSON = configFile['Configurations']['Directory_To_Save_jsonFile']
+directoryToSaveJSON = configFile['Configurations']['Directory_To_Save_jsonFiles']
+directoryToSaveSQL = configFile['Configurations']['Directory_To_Save_sqlFiles']
+isSQL = configFile['Configurations']['SQL_Format']
 
 currentDir = os.path.dirname(os.path.realpath(__file__))
 absDir = jsonConfigTables
 scriptName = "DataMock Generator"
-version = "v3.0.5"
+version = "v3.1.0"
 ################################ SETUP AREA ################################
 
 
@@ -51,26 +54,16 @@ def MockDataGenerator() -> None:
         jsonRecord = SF.SearchIfExist(jsonRecord, currentDir, dataSetName, directoryToSaveJSON, jsonFinalName)
         JSON_ALL_TABLES = FH.OpenFile(absDir)
 
-        for tableName in JSON_ALL_TABLES:
-            if (not tableName in jsonRecord.keys()):
-                PMS(
-                    f"Obtaining the amount of registers for table: {tableName}")
-                amountOfRegisters = GD.GetAmountOfRegisters(JSON_ALL_TABLES, tableName)
-                PMD(f"Registers for {tableName}: {amountOfRegisters}",
-                    f"Generating data for {tableName}")
-                PMD("This may taking a while, bassed on the",
-                    "Amount of registers and amount of columns")
-                dataMockRecord, actualTableDictionary = GD.CreateRecords(JSON_ALL_TABLES, tableName, amountOfRegisters, jsonRecord)
-                jsonRecord = actualTableDictionary
-
-            PMS(f"Creating CSV file for {tableName}")
-            FH.WriteCSV(dataMockRecord, dataSetName, tableName)
+        if(isSQL):
+            SQL(JSON_ALL_TABLES, jsonRecord, dataSetName, isSQL)
+        else:
+            CSV(JSON_ALL_TABLES, jsonRecord, dataSetName, isSQL)
 
         PMS(f"Creating JSON file for {dataSetName}")
         FH.WriteJSON(jsonRecord, dataSetName, jsonFinalName)
 
         PMS("Moving Files...")
-        FH.SortFiles(jsonConfigTables, dataSetName, directoryToSaveCSV, directoryToSaveJSON, currentDir)
+        FH.SortFiles(jsonConfigTables, dataSetName, directoryToSaveCSV, directoryToSaveJSON, directoryToSaveSQL,currentDir)
         PMS(f'{scriptName} - {version} Finished Successfully!.')
     except Exception as e:
         PMS("Error: Try to run again.")

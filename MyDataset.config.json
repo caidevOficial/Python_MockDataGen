@@ -1,11 +1,11 @@
 {
-    "First_Table": {
+    "Customers": {
         "MetaData": [{
-            "AmountOfRegisters": 11000
+            "AmountOfRegisters": 100
         }],
         "Data": [{
                 "mode": "NULLABLE",
-                "name": "id_Table_1_pk",
+                "name": "id_customer",
                 "type": "STRING",
                 "ispk": "true",
                 "format": "????##??##",
@@ -13,106 +13,10 @@
             },
             {
                 "mode": "NULLABLE",
-                "name": "name",
+                "name": "name_customer",
                 "type": "STRING",
                 "faketype": "name",
                 "parameters": []
-            },
-            {
-                "mode": "NULLABLE",
-                "name": "country",
-                "type": "STRING",
-                "faketype": "country",
-                "parameters": []
-            },
-            {
-                "mode": "NULLABLE",
-                "name": "amount",
-                "type": "STRING",
-                "faketype": "pyfloat",
-                "parameters": [
-                    2,2,true,10,50
-                ]
-            }
-        ]
-    },
-    "Second_Table": {
-        "MetaData": [{
-            "AmountOfRegisters": 15000
-        }],
-        "Data": [{
-                "mode": "NULLABLE",
-                "name": "id_Table_2_pk",
-                "type": "STRING",
-                "ispk": "true",
-                "format": "??????##",
-                "letters": "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-            },
-            {
-                "mode": "NULLABLE",
-                "name": "id_2",
-                "type": "STRING",
-                "ispk": "true",
-                "format": "????##",
-                "letters": "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-            },
-            {
-                "mode": "NULLABLE",
-                "name": "about",
-                "type": "STRING",
-                "faketype": "sentence",
-                "parameters": []
-            },
-            {
-                "mode": "NULLABLE",
-                "name": "name",
-                "type": "STRING",
-                "faketype": "name",
-                "parameters": []
-            },
-            {
-                "mode": "NULLABLE",
-                "name": "country",
-                "type": "STRING",
-                "faketype": "country",
-                "parameters": []
-            },
-            {
-                "mode": "NULLABLE",
-                "name": "amount",
-                "type": "STRING",
-                "faketype": "city",
-                "parameters": []
-            }
-        ]
-    },
-    "Third_Table": {
-        "MetaData": [{
-            "AmountOfRegisters": 22000
-        }],
-        "Data": [{
-                "mode": "NULLABLE",
-                "name": "id_Table_3_pk",
-                "type": "STRING",
-                "ispk": "true",
-                "format": "????##",
-                "letters": "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-            },
-            {
-                "mode": "NULLABLE",
-                "name": "id_Table_1_pk_fk",
-                "type": "STRING",
-                "isfk": "true",
-                "sourceTable": "First_Table",
-                "sourceField": "id_Table_1_pk"
-            },
-            {
-                "mode": "NULLABLE",
-                "name": "id_Table_2_pk_fk",
-                "type": "STRING",
-                "isfk": "true",
-                "sourceTable": "Second_Table",
-                "sourceField": "id_Table_2_pk"
             },
             {
                 "mode": "NULLABLE",
@@ -130,9 +34,107 @@
             },
             {
                 "mode": "NULLABLE",
-                "name": "amount",
+                "name": "age",
+                "type": "NUMERIC",
+                "faketype": "pyint",
+                "parameters": [
+                    18,85,1
+                ]
+            }
+        ]
+    },
+    "Vendors": {
+        "MetaData": [{
+            "AmountOfRegisters": 15
+        }],
+        "Data": [{
+                "mode": "NULLABLE",
+                "name": "id_vendor",
                 "type": "STRING",
-                "faketype": "city",
+                "ispk": "true",
+                "format": "??????##",
+                "letters": "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            },
+            {
+                "mode": "NULLABLE",
+                "name": "id_enterprise_employee",
+                "type": "STRING",
+                "ispk": "true",
+                "format": "????##",
+                "letters": "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            },
+            {
+                "mode": "NULLABLE",
+                "name": "about",
+                "type": "STRING",
+                "faketype": "sentence",
+                "parameters": []
+            },
+            {
+                "mode": "NULLABLE",
+                "name": "name_vendor",
+                "type": "STRING",
+                "faketype": "name",
+                "parameters": []
+            },
+            {
+                "mode": "NULLABLE",
+                "name": "country",
+                "type": "STRING",
+                "faketype": "country",
+                "parameters": []
+            },
+            {
+                "mode": "NULLABLE",
+                "name": "age",
+                "type": "NUMERIC",
+                "faketype": "pyint",
+                "parameters": [
+                    18,85,1
+                ]
+            }
+        ]
+    },
+    "Dogs": {
+        "MetaData": [{
+            "AmountOfRegisters": 100
+        }],
+        "Data": [{
+                "mode": "NULLABLE",
+                "name": "id_dog",
+                "type": "STRING",
+                "ispk": "true",
+                "format": "????##",
+                "letters": "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            },
+            {
+                "mode": "NULLABLE",
+                "name": "id_customer",
+                "type": "STRING",
+                "isfk": "true",
+                "sourceTable": "Customers",
+                "sourceField": "id_customer"
+            },
+            {
+                "mode": "NULLABLE",
+                "name": "id_vendor",
+                "type": "STRING",
+                "isfk": "true",
+                "sourceTable": "Vendors",
+                "sourceField": "id_vendor"
+            },
+            {
+                "mode": "NULLABLE",
+                "name": "cloth_color",
+                "type": "STRING",
+                "faketype": "safe_color_name",
+                "parameters": []
+            },
+            {
+                "mode": "NULLABLE",
+                "name": "dog_name",
+                "type": "STRING",
+                "faketype": "first_name_nonbinary",
                 "parameters": []
             }
         ]

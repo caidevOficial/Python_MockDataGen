@@ -27,7 +27,6 @@ def SearchIfExist(jasonDictionary: dict, currentDir: str, dataSetName: str, dirN
         dataSetName (str): [First Part of the name of the folder/file that contains the JSON files]
         dirNameJSONFiles (str): [Second Part of the name of the folder that contains the JSON files]
         jsonFinalName (str): [Second part of the name of the JSON file that contains the data]
-
     Returns:
         dict: [An empty dictionary if fails to open the file, otherwise, the dictionary is returned]
     """
