@@ -15,11 +15,10 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from ntpath import join
 import random
 
-from faker import Faker as fk
 import faker
+from faker import Faker as fk
 from FileHandle_Mod.FileHandle import DoubleMessage as PMD
 from FileHandle_Mod.FileHandle import SingleMessage as PMS
 

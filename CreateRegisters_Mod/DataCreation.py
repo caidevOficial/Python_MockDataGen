@@ -18,6 +18,7 @@ from FileHandle_Mod.FileHandle import DoubleMessage as PMD
 from FileHandle_Mod.FileHandle import SingleMessage as PMS
 from GetData_Mod import GetData as GD
 
+
 def CreateData(JSON_ALL_TABLES: dict, jsonRecord:dict, dataSetName:str, sqlStatement:bool) -> bool:
     """[summary]
     Creates the data for a file.

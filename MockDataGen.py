@@ -20,10 +20,11 @@ from time import time
 
 import FileHandle_Mod.FileHandle as FH
 import SearchIfExist_Mod.Search as SF
+from CreateRegisters_Mod.DataCreation import CreateRegisterForCSV as CSV
+from CreateRegisters_Mod.DataCreation import CreateRegisterForSQL as SQL
 from FileHandle_Mod.FileHandle import DoubleMessage as PMD
 from FileHandle_Mod.FileHandle import SingleMessage as PMS
 from GetData_Mod import GetData as GD
-from CreateRegisters_Mod.DataCreation import CreateRegisterForCSV as CSV, CreateRegisterForSQL as SQL
 
 ################################ SETUP AREA ################################
 configFile = FH.OpenFile('Configurations.json')
