@@ -22,9 +22,7 @@ import FileHandle_Mod.FileHandle as FH
 import SearchIfExist_Mod.Search as SF
 from CreateRegisters_Mod.DataCreation import CreateRegisterForCSV as CSV
 from CreateRegisters_Mod.DataCreation import CreateRegisterForSQL as SQL
-from FileHandle_Mod.FileHandle import DoubleMessage as PMD
 from FileHandle_Mod.FileHandle import SingleMessage as PMS
-from GetData_Mod import GetData as GD
 
 ################################ SETUP AREA ################################
 configFile = FH.OpenFile('Configurations.json')
@@ -44,13 +42,11 @@ scriptName = "DataMock Generator"
 version = "v3.1.0"
 ################################ SETUP AREA ################################
 
-
 def MockDataGenerator() -> None:
     """[summary]
     Creates Files in csv with the data generated and a Json with the tables and its pk values inside.
     """
     jsonRecord = {}
-    dataMockRecord = []
     try:
         jsonRecord = SF.SearchIfExist(jsonRecord, currentDir, dataSetName, directoryToSaveJSON, jsonFinalName)
         JSON_ALL_TABLES = FH.OpenFile(absDir)
@@ -70,8 +66,8 @@ def MockDataGenerator() -> None:
         PMS("Error: Try to run again.")
         PMS(f"Exception: {e}")
 
-
 ################################# TEST AREA ################################
+
 if __name__ == "__main__":
     start_time = time()
     MockDataGenerator()

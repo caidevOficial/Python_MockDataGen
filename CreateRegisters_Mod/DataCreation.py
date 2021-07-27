@@ -35,10 +35,8 @@ def CreateData(JSON_ALL_TABLES: dict, jsonRecord:dict, dataSetName:str, sqlState
         if (not tableName in jsonRecord.keys()):
             PMS(f"Obtaining the amount of registers for table: {tableName}")
             amountOfRegisters = GD.GetAmountOfRegisters(JSON_ALL_TABLES, tableName)
-            PMD(f"Registers for {tableName}: {amountOfRegisters}",
-                f"Generating data for {tableName}")
-            PMD("This may taking a while, bassed on the",
-                "Amount of registers and amount of columns")
+            PMD(f"Registers for {tableName}: {amountOfRegisters}", f"Generating data for {tableName}")
+            PMD("This may taking a while, bassed on the", "Amount of registers and amount of columns")
             dataMockRecord, actualTableDictionary = GD.CreateRecords(JSON_ALL_TABLES, tableName, amountOfRegisters, jsonRecord, sqlStatement)
             jsonRecord = actualTableDictionary
         if(sqlStatement):

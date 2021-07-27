@@ -60,10 +60,12 @@ def GetRandomValueFaker(fakeType: str, fake: fk, listOfParameters: list):
         else:
             randomvalue = fakeFunc()
     except Exception as e:
-        PMS(f'Error in the function getRandomValueFaker. Error: {e}')
+        PMS(f'Error in the function getRandomValueFaker.')
+        PMS(f'Exception: {e}')
         return getattr(fake, fakeAttr)
     finally:
         return randomvalue
+
 
 def GetAmountOfRegisters(JSON_ALL_TABLES: dict, tableName: str) -> int:
     """
@@ -88,6 +90,7 @@ def GetAmountOfRegisters(JSON_ALL_TABLES: dict, tableName: str) -> int:
     finally:
         return amountOfRegisters
 
+
 def GetRandomPkOrFk(listOfPk: dict, sourceTable: str, sourceField: str) -> str:
     """
     Obtains a random number from the list of pk of the table 'sourceTable'.
@@ -102,11 +105,12 @@ def GetRandomPkOrFk(listOfPk: dict, sourceTable: str, sourceField: str) -> str:
         randomPk = []
         listOfValues = listOfPk[sourceTable][sourceField]
         randomPk = random.choice(listOfValues)
-    except:
-        PMD(f'Error getting the list of pk from the table {sourceTable}.',
-            'An empty list will be returned')
+    except Exception as e:
+        PMD(f'Error getting the list of pk from the table {sourceTable}.', 'An empty list will be returned')
+        PMS(f'Exception: {e}')
     finally:
         return randomPk
+
 
 def GetColumnsNames(JSON_ALL_TABLES: dict, tableName:str) -> str:
     """[summary]
@@ -126,10 +130,11 @@ def GetColumnsNames(JSON_ALL_TABLES: dict, tableName:str) -> str:
                 else:
                     columnsNames = columnsNames + "," + columnsListOfDictionary[index]["name"]
         
-    except Exception as ww:
-        PMS(f'Error in the function GetColumnsNames. Error: {ww}')
+    except Exception as e:
+        PMS(f'Error in the function GetColumnsNames. Error: {e}')
     finally:
         return columnsNames
+
 
 def CreateRecordString(actualRecord:list, pksOfThisTable:list, values:list, jsonVariable:dict, jsonOfThisTable:dict, tableName:str, element:str, fake:faker) -> list:
     """[summary]
@@ -148,7 +153,6 @@ def CreateRecordString(actualRecord:list, pksOfThisTable:list, values:list, json
     """
     if('ispk' in element.keys()):
         uniqueID = fake.unique.bothify(element["format"], element["letters"])
-
         actualRecord.append(f'"{uniqueID}"')
         pksOfThisTable.append(uniqueID)
         columnName = element["name"]
@@ -167,7 +171,6 @@ def CreateRecordString(actualRecord:list, pksOfThisTable:list, values:list, json
         if(fakeType == "bothify"):
             dataCell = fake.botify(element["format"], element["letters"])
             actualRecord.append(f'"{dataCell}"')
-
         elif ('parameters' in element.keys()):
             listOfParameters = element["parameters"]
             actualRecord.append(f"'{GetRandomValueFaker(fakeType, fake, listOfParameters)}'")
@@ -180,6 +183,7 @@ def CreateRecordString(actualRecord:list, pksOfThisTable:list, values:list, json
         actualRecord.append(f'"{randomPK}"')
     
     return actualRecord
+
 
 def CreateRecordNormal(actualRecord:list, pksOfThisTable:list, values:list, jsonVariable:dict, jsonOfThisTable:dict, tableName:str, element:str, fake:faker) -> list:
     """[summary]
@@ -201,11 +205,9 @@ def CreateRecordNormal(actualRecord:list, pksOfThisTable:list, values:list, json
 
     if('ispk' in element.keys()):
         uniqueID = fake.unique.bothify(element["format"], element["letters"])
-
         actualRecord.append(uniqueID)
         pksOfThisTable.append(uniqueID)
         columnName = element["name"]
-
         if (not columnName in jsonOfThisTable[tableName]):
             values.append(uniqueID)
             jsonOfThisTable[tableName][columnName] = values
@@ -213,18 +215,15 @@ def CreateRecordNormal(actualRecord:list, pksOfThisTable:list, values:list, json
             values = jsonOfThisTable[tableName][columnName]
             values.append(uniqueID)
             jsonOfThisTable[tableName][columnName] = values
-
     elif ('faketype' in element.keys()):
         fakeType = element["faketype"]
         listOfParameters = []
         if(fakeType == "bothify"):
             dataCell = fake.botify(element["format"], element["letters"])
             actualRecord.append(str(dataCell))
-
         elif ('parameters' in element.keys()):
             listOfParameters = element["parameters"]
             actualRecord.append(GetRandomValueFaker(fakeType, fake, listOfParameters))
-
     elif ('isfk' in element.keys()):
         sourceTable = element["sourceTable"]
         sourceField = element["sourceField"]
@@ -233,6 +232,7 @@ def CreateRecordNormal(actualRecord:list, pksOfThisTable:list, values:list, json
         actualRecord.append(str(randomPK))
     
     return actualRecord
+
 
 def CreateRecords(JSON_ALL_TABLES: dict, tableName: str, amountOfRegisters: int, jsonVariable: dict, sqlStatement:bool):
     """
@@ -255,8 +255,7 @@ def CreateRecords(JSON_ALL_TABLES: dict, tableName: str, amountOfRegisters: int,
     jsonOfThisTable = {}
     fake = fk()
 
-    PMD(f'Creating registers for the table {tableName}',
-        'This action may taking a while...')
+    PMD(f'Creating registers for the table {tableName}', 'This action may taking a while...')
 
     try:
         counter = 0
@@ -290,12 +289,11 @@ def CreateRecords(JSON_ALL_TABLES: dict, tableName: str, amountOfRegisters: int,
             counter += 1
 
             if counter == 5000:
-                
                 PMS(f"## {register} Created: {number+1}")
                 counter = 0
-    except Exception as aa:
+    except Exception as e:
         PMS(f'Error getting the list of values of the "Data" field of {tableName}')
-        PMS(f'Exception: {aa}')
+        PMS(f'Exception: {e}')
     finally:
         PMS(f"## Total {register} Created: {number+1}")
         return tableRecords, jsonVariable

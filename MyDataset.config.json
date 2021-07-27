@@ -1,7 +1,7 @@
 {
     "Customers": {
         "MetaData": [{
-            "AmountOfRegisters": 100
+            "AmountOfRegisters": 1000
         }],
         "Data": [{
                 "mode": "NULLABLE",
@@ -45,7 +45,7 @@
     },
     "Vendors": {
         "MetaData": [{
-            "AmountOfRegisters": 15
+            "AmountOfRegisters": 150
         }],
         "Data": [{
                 "mode": "NULLABLE",
@@ -97,7 +97,7 @@
     },
     "Dogs": {
         "MetaData": [{
-            "AmountOfRegisters": 100
+            "AmountOfRegisters": 2000
         }],
         "Data": [{
                 "mode": "NULLABLE",

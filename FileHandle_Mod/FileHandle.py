@@ -41,6 +41,7 @@ def DoubleMessage(message1: str, message2: str) -> None:
     print(f'###     {message2}')
     print("######################################################\n")
 
+
 def OpenFile(abspath: str) -> dict:
     """[summary]
     Opens the file specified in 'abspath'.
@@ -54,12 +55,13 @@ def OpenFile(abspath: str) -> dict:
         with open(abspath, 'r+') as schemafile:
             TABLE_FIELDS = json.load(schemafile)
             print("Success: File Opened!")
-    except Exception as eeeeee:
+    except Exception as e:
         TABLE_FIELDS = {}
-        DoubleMessage(f'\nError opening the file {abspath}','An empty dictionary will be returned.')
-        SingleMessage(f"\nException: {eeeeee}")
+        DoubleMessage(f'Error opening the file {abspath}','An empty dictionary will be returned.')
+        SingleMessage(f"Exception: {e}")
 
     return TABLE_FIELDS
+
 
 def WriteJSON(myDict: dict, datasetName: str, jsonFileNameToSave: str) -> None:
     """
@@ -75,9 +77,10 @@ def WriteJSON(myDict: dict, datasetName: str, jsonFileNameToSave: str) -> None:
             jsonFile.write(json.dumps(myDict, sort_keys=True, indent=4, separators=(',', ':')))
             jsonFile.close()
             SingleMessage('Success: Json file created!')
-    except Exception as eeeee:
-        SingleMessage('\nError: The json could not be written')
-        SingleMessage(f"\nException: {eeeee}")
+    except Exception as e:
+        SingleMessage('Error: The json could not be written')
+        SingleMessage(f"Exception: {e}")
+
 
 def WriteCSV(myList: list, datasetName: str, tableName: str) -> None:
     """
@@ -93,9 +96,10 @@ def WriteCSV(myList: list, datasetName: str, tableName: str) -> None:
             csvFile.write(str(myList))
             csvFile.close()
             SingleMessage('Success: CSV file created!')
-    except Exception as eeee:
-        SingleMessage('\nError: The CSV could not be written')
-        SingleMessage(f"\nException: {eeee}")
+    except Exception as e:
+        SingleMessage('Error: The CSV could not be written')
+        SingleMessage(f"Exception: {e}")
+
 
 def WriteSQL(myListOfQuerys: list, datasetName: str, tableName: str) -> None:
     """
@@ -111,9 +115,10 @@ def WriteSQL(myListOfQuerys: list, datasetName: str, tableName: str) -> None:
             sqlFile.write(str(myListOfQuerys))
             sqlFile.close()
             SingleMessage('Success: SQL file created!')
-    except Exception as eee:
-        SingleMessage('\nError: The SQL could not be written')
-        SingleMessage(f"\nException: {eee}")
+    except Exception as e:
+        SingleMessage('Error: The SQL could not be written')
+        SingleMessage(f"Exception: {e}")
+
 
 def SortSingleFile(filename:str, formatFile:str, datasetName: str,directoryToSave:str, moved:bool) -> bool:
     """[summary]
@@ -136,6 +141,7 @@ def SortSingleFile(filename:str, formatFile:str, datasetName: str,directoryToSav
         moved = True
     return moved
 
+
 def SortFiles(exceptedFile: str, datasetName: str,directoryOfCSV:str, directoryOfJson:str, directoryOfSQL:str, currentDir:str) -> bool:
     """ 
     Moves the files with format json and csv (except the configuration's json) to two directories, one for all the json and the other for the csv.
@@ -153,8 +159,8 @@ def SortFiles(exceptedFile: str, datasetName: str,directoryOfCSV:str, directoryO
                 moveFiles = SortSingleFile(filename, 'csv', datasetName, directoryOfCSV, moveFiles)
                 moveFiles = SortSingleFile(filename, 'json', datasetName, directoryOfJson, moveFiles)
                 moveFiles = SortSingleFile(filename, 'sql', datasetName, directoryOfSQL, moveFiles)
-    except Exception as ee:
-        SingleMessage(f'\nError: Reading of {currentDir} has failed.')
-        SingleMessage(f"\nException: {ee}")
+    except Exception as e:
+        SingleMessage(f'Error: Reading of {currentDir} has failed.')
+        SingleMessage(f"Exception: {e}")
     finally:
         return moveFiles
