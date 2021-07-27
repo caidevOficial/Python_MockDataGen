@@ -5,6 +5,31 @@
   </tr>
 </table></br>
 
+---
+
+<p align="left"> <img src="https://komarev.com/ghpvc/?username=caidevoficial&label=Profile%20views&color=0e75b6&style=flat" alt="caidevoficial" /> </p>
+
+<p align="left"> <a href="https://github.com/CaidevOficial"><img src="https://github-profile-trophy.vercel.app/?username=caidevoficial&theme=nord&column=7" alt="caidevoficial" /></a> </p>
+
+---
+<details>
+  <summary>:zap: GitHub Stats</summary>
+    <img align="center" src="https://github-readme-stats-caidevposeidon.vercel.app/api?username=caidevOficial&show_icons=true&theme=chartreuse-dark&count_private=true&show_owner=true&include_all_commits=true" /><br><br>
+</details>
+
+<details>
+    <summary>:zap: Most Used Languages</summary>
+    <img align="center" src="https://github-readme-stats-caidevposeidon.vercel.app/api/top-langs/?username=caidevOficial&layout=compact&theme=chartreuse-dark&langs_count=10&exclude_repo=Java_Lineage2_aCis_From_345&hide=html,css"/><br>
+</details>
+
+---
+
+```python
+def UpgradeFunction():
+    message = "Upgrading my skills [Py Version!]"
+    return message
+```
+
 # MockData Generator v3.1.0 ⤵️
 
 _The MockData Generator is a tool that allows, through some configurations, to create random records in a document with a '.csv' format or '.sql' for tables, based on their column structure and thus later to be able to load them into bigdata._
