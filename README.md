@@ -30,7 +30,7 @@ def UpgradeFunction():
     return message
 ```
 
-# MockData Generator v3.1.0 ⤵️
+# MockData Generator v3.1.2 ⤵️
 
 _The MockData Generator is a tool that allows, through some configurations, to create random records in a document with a '.csv' format or '.sql' for tables, based on their column structure and thus later to be able to load them into bigdata._
 
