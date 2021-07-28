@@ -1,9 +1,12 @@
 {
     "Customers": {
-        "MetaData": [{
-            "AmountOfRegisters": 1000
-        }],
-        "Data": [{
+        "MetaData": [
+            {
+                "AmountOfRegisters": 200000
+            }
+        ],
+        "Data": [
+            {
                 "mode": "NULLABLE",
                 "name": "id_customer",
                 "type": "STRING",
@@ -27,9 +30,9 @@
             },
             {
                 "mode": "NULLABLE",
-                "name": "country",
+                "name": "city",
                 "type": "STRING",
-                "faketype": "country",
+                "faketype": "city",
                 "parameters": []
             },
             {
@@ -38,16 +41,21 @@
                 "type": "NUMERIC",
                 "faketype": "pyint",
                 "parameters": [
-                    18,85,1
+                    18,
+                    85,
+                    1
                 ]
             }
         ]
     },
     "Vendors": {
-        "MetaData": [{
-            "AmountOfRegisters": 150
-        }],
-        "Data": [{
+        "MetaData": [
+            {
+                "AmountOfRegisters": 150000
+            }
+        ],
+        "Data": [
+            {
                 "mode": "NULLABLE",
                 "name": "id_vendor",
                 "type": "STRING",
@@ -59,9 +67,11 @@
                 "mode": "NULLABLE",
                 "name": "id_enterprise_employee",
                 "type": "STRING",
-                "ispk": "true",
-                "format": "????##",
-                "letters": "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                "faketype": "bothify",
+                "parameters": [
+                    "????##",
+                    "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                ]
             },
             {
                 "mode": "NULLABLE",
@@ -79,9 +89,9 @@
             },
             {
                 "mode": "NULLABLE",
-                "name": "country",
+                "name": "city",
                 "type": "STRING",
-                "faketype": "country",
+                "faketype": "city",
                 "parameters": []
             },
             {
@@ -90,16 +100,21 @@
                 "type": "NUMERIC",
                 "faketype": "pyint",
                 "parameters": [
-                    18,85,1
+                    18,
+                    85,
+                    1
                 ]
             }
         ]
     },
     "Dogs": {
-        "MetaData": [{
-            "AmountOfRegisters": 2000
-        }],
-        "Data": [{
+        "MetaData": [
+            {
+                "AmountOfRegisters": 660000
+            }
+        ],
+        "Data": [
+            {
                 "mode": "NULLABLE",
                 "name": "id_dog",
                 "type": "STRING",

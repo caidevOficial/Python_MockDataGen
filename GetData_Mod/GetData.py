@@ -153,7 +153,7 @@ def CreateRecordString(actualRecord:list, pksOfThisTable:list, values:list, json
     """
     if('ispk' in element.keys()):
         uniqueID = fake.unique.bothify(element["format"], element["letters"])
-        actualRecord.append(f'"{uniqueID}"')
+        actualRecord.append(f"'{uniqueID}'")
         pksOfThisTable.append(uniqueID)
         columnName = element["name"]
 
@@ -168,10 +168,7 @@ def CreateRecordString(actualRecord:list, pksOfThisTable:list, values:list, json
     elif ('faketype' in element.keys()):
         fakeType = element["faketype"]
         listOfParameters = []
-        if(fakeType == "bothify"):
-            dataCell = fake.botify(element["format"], element["letters"])
-            actualRecord.append(f'"{dataCell}"')
-        elif ('parameters' in element.keys()):
+        if ('parameters' in element.keys()):
             listOfParameters = element["parameters"]
             actualRecord.append(f"'{GetRandomValueFaker(fakeType, fake, listOfParameters)}'")
 
@@ -180,7 +177,7 @@ def CreateRecordString(actualRecord:list, pksOfThisTable:list, values:list, json
         sourceField = element["sourceField"]
 
         randomPK = GetRandomPkOrFk(jsonVariable, sourceTable, sourceField)
-        actualRecord.append(f'"{randomPK}"')
+        actualRecord.append(f"'{randomPK}'")
     
     return actualRecord
 
@@ -218,10 +215,7 @@ def CreateRecordNormal(actualRecord:list, pksOfThisTable:list, values:list, json
     elif ('faketype' in element.keys()):
         fakeType = element["faketype"]
         listOfParameters = []
-        if(fakeType == "bothify"):
-            dataCell = fake.botify(element["format"], element["letters"])
-            actualRecord.append(str(dataCell))
-        elif ('parameters' in element.keys()):
+        if ('parameters' in element.keys()):
             listOfParameters = element["parameters"]
             actualRecord.append(GetRandomValueFaker(fakeType, fake, listOfParameters))
     elif ('isfk' in element.keys()):

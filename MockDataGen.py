@@ -15,14 +15,17 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import datetime
 import os
-from time import time
 
 import FileHandle_Mod.FileHandle as FH
 import SearchIfExist_Mod.Search as SF
 from CreateRegisters_Mod.DataCreation import CreateRegisterForCSV as CSV
 from CreateRegisters_Mod.DataCreation import CreateRegisterForSQL as SQL
 from FileHandle_Mod.FileHandle import SingleMessage as PMS
+from Statistics_Mod.Statistics import CountRegisters as CR
+from Statistics_Mod.Statistics import FormatAmountRegisters as FAR
+from Statistics_Mod.Statistics import TimeFormatted as TF
 
 ################################ SETUP AREA ################################
 configFile = FH.OpenFile('Configurations.json')
@@ -39,7 +42,7 @@ isSQL = configFile['Configurations']['SQL_Format']
 currentDir = os.path.dirname(os.path.realpath(__file__))
 absDir = jsonConfigTables
 scriptName = "DataMock Generator"
-version = "v3.1.0"
+version = "v3.1.2"
 ################################ SETUP AREA ################################
 
 def MockDataGenerator() -> None:
@@ -57,11 +60,17 @@ def MockDataGenerator() -> None:
             CSV(JSON_ALL_TABLES, jsonRecord, dataSetName, isSQL)
 
         PMS(f"Creating JSON file for {dataSetName}")
+        ################
+        totalRecords = CR(jsonRecord)
+        amountRegisters = FAR(totalRecords)
+
+        ##############
         FH.WriteJSON(jsonRecord, dataSetName, jsonFinalName)
 
         PMS("Moving Files...")
         FH.SortFiles(jsonConfigTables, dataSetName, directoryToSaveCSV, directoryToSaveJSON, directoryToSaveSQL,currentDir)
         PMS(f'{scriptName} - {version} Finished Successfully!.')
+        PMS(f'Total Records Created: {amountRegisters}')
     except Exception as e:
         PMS("Error: Try to run again.")
         PMS(f"Exception: {e}")
@@ -69,10 +78,9 @@ def MockDataGenerator() -> None:
 ################################# TEST AREA ################################
 
 if __name__ == "__main__":
-    start_time = time()
+    start_time = datetime.datetime.now()
     MockDataGenerator()
-    elapsed_time = time() - start_time
-    elapsed_time = round(elapsed_time, 4)
-    PMS(f"Elapsed Time: {elapsed_time} seconds")
+    elapsed_time = TF(start_time)
+    PMS(f"Elapsed Time: {elapsed_time}")
     PMS("Success! All task done. Press a key to close the app")
     end = input()
