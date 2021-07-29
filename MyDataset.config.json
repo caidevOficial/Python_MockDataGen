@@ -2,7 +2,7 @@
     "Customers": {
         "MetaData": [
             {
-                "AmountOfRegisters": 200000
+                "AmountOfRegisters": 600000
             }
         ],
         "Data": [
@@ -51,7 +51,7 @@
     "Vendors": {
         "MetaData": [
             {
-                "AmountOfRegisters": 150000
+                "AmountOfRegisters": 400000
             }
         ],
         "Data": [
@@ -110,7 +110,7 @@
     "Dogs": {
         "MetaData": [
             {
-                "AmountOfRegisters": 660000
+                "AmountOfRegisters": 500000
             }
         ],
         "Data": [

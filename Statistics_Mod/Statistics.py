@@ -53,11 +53,11 @@ def FormatAmountRegisters(amount:int) -> str:
 
 def TimeFormatted(start_time:datetime) -> str:
     """[summary]
-        Format the time (seconds) as a string.
+        Format the time as a string.
     Args:
-        start_time (datetime): [Amount of time]
+        start_time (datetime): [Time to be formatted.]
     Returns:
-        str: [The message with the time]
+        str: [The message with the time like 'X minute(s) Y seconds'.]
     """
     seconds = ( datetime.datetime.now() - start_time ).total_seconds()
     m, s = divmod(seconds, 60)

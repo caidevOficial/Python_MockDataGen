@@ -23,6 +23,7 @@ import SearchIfExist_Mod.Search as SF
 from CreateRegisters_Mod.DataCreation import CreateRegisterForCSV as CSV
 from CreateRegisters_Mod.DataCreation import CreateRegisterForSQL as SQL
 from FileHandle_Mod.FileHandle import SingleMessage as PMS
+from FileHandle_Mod.FileHandle import DoubleMessage as PMD
 from Statistics_Mod.Statistics import CountRegisters as CR
 from Statistics_Mod.Statistics import FormatAmountRegisters as FAR
 from Statistics_Mod.Statistics import TimeFormatted as TF
@@ -41,8 +42,8 @@ isSQL = configFile['Configurations']['SQL_Format']
 
 currentDir = os.path.dirname(os.path.realpath(__file__))
 absDir = jsonConfigTables
-scriptName = "DataMock Generator"
-version = "v3.1.2"
+scriptName = "MockData Generator"
+version = "v3.1.24"
 ################################ SETUP AREA ################################
 
 def MockDataGenerator() -> None:
@@ -69,7 +70,7 @@ def MockDataGenerator() -> None:
 
         PMS("Moving Files...")
         FH.SortFiles(jsonConfigTables, dataSetName, directoryToSaveCSV, directoryToSaveJSON, directoryToSaveSQL,currentDir)
-        PMS(f'{scriptName} - {version} Finished Successfully!.')
+        PMD(f'{scriptName} - {version}','Finished Successfully!.')
         PMS(f'Total Records Created: {amountRegisters}')
     except Exception as e:
         PMS("Error: Try to run again.")
