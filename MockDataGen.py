@@ -22,28 +22,15 @@ import FileHandle_Mod.FileHandle as FH
 import SearchIfExist_Mod.Search as SF
 from CreateRegisters_Mod.DataCreation import CreateRegisterForCSV as CSV
 from CreateRegisters_Mod.DataCreation import CreateRegisterForSQL as SQL
-from FileHandle_Mod.FileHandle import SingleMessage as PMS
 from FileHandle_Mod.FileHandle import DoubleMessage as PMD
+from FileHandle_Mod.FileHandle import SingleMessage as PMS
+from GetConfigs_Mod.GetConfigsPython import ScriptConfigurator as GCP
 from Statistics_Mod.Statistics import CountRegisters as CR
 from Statistics_Mod.Statistics import FormatAmountRegisters as FAR
 from Statistics_Mod.Statistics import TimeFormatted as TF
 
 ################################ SETUP AREA ################################
-configFile = FH.OpenFile('Configurations.json')
-dataSetName = configFile['Configurations']['DatasetName']
-
-jsonConfigTables = configFile['Configurations']['DatasetFileToOpen']
-jsonFinalName = configFile['Configurations']['NameOfDatasetToSaveInJson']
-
-directoryToSaveCSV = configFile['Configurations']['Directory_To_Save_csvFiles']
-directoryToSaveJSON = configFile['Configurations']['Directory_To_Save_jsonFiles']
-directoryToSaveSQL = configFile['Configurations']['Directory_To_Save_sqlFiles']
-isSQL = configFile['Configurations']['SQL_Format']
-
-currentDir = os.path.dirname(os.path.realpath(__file__))
-absDir = jsonConfigTables
-scriptName = "MockData Generator"
-version = "v3.1.242"
+configurator = GCP(os.path.dirname(os.path.realpath(__file__)))
 ################################ SETUP AREA ################################
 
 def MockDataGenerator() -> None:
@@ -52,25 +39,25 @@ def MockDataGenerator() -> None:
     """
     jsonRecord = {}
     try:
-        jsonRecord = SF.SearchIfExist(jsonRecord, currentDir, dataSetName, directoryToSaveJSON, jsonFinalName)
-        JSON_ALL_TABLES = FH.OpenFile(absDir)
+        jsonRecord = SF.SearchIfExist(jsonRecord, configurator.getCurrentDir(), configurator.getDatasetName(), configurator.getJSONDirectory(), configurator.getJSONFileName())
+        JSON_ALL_TABLES = FH.OpenFile(configurator.getAbsolutePathOfConfigFile())
 
-        if(isSQL):
-            SQL(JSON_ALL_TABLES, jsonRecord, dataSetName, isSQL)
+        if(configurator.isSql()):
+            SQL(JSON_ALL_TABLES, jsonRecord, configurator.getDatasetName(), configurator.isSql())
         else:
-            CSV(JSON_ALL_TABLES, jsonRecord, dataSetName, isSQL)
+            CSV(JSON_ALL_TABLES, jsonRecord, configurator.getDatasetName(), configurator.isSql())
 
-        PMS(f"Creating JSON file for {dataSetName}")
+        PMS(f"Creating JSON file for {configurator.getDatasetName()}")
         ################
         totalRecords = CR(jsonRecord)
         amountRegisters = FAR(totalRecords)
 
         ##############
-        FH.WriteJSON(jsonRecord, dataSetName, jsonFinalName)
+        FH.WriteJSON(jsonRecord, configurator.getDatasetName(), configurator.getJSONFileName())
 
         PMS("Moving Files...")
-        FH.SortFiles(jsonConfigTables, dataSetName, directoryToSaveCSV, directoryToSaveJSON, directoryToSaveSQL,currentDir)
-        PMD(f'{scriptName} - {version}','Finished Successfully!.')
+        FH.SortFiles(configurator.getNameConfigOfDataset(), configurator.getDatasetName(), configurator.getCSVDirectory(), configurator.getJSONDirectory(), configurator.getSQLDirectory(),configurator.getCurrentDir())
+        PMD(f'{configurator.getScriptName()} - {configurator.getScriptVersion()}','Finished Successfully!.')
         PMS(f'Total Records Created: {amountRegisters}')
     except Exception as e:
         PMS("Error: Try to run again.")
