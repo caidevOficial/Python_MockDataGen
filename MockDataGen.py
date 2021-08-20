@@ -43,7 +43,7 @@ isSQL = configFile['Configurations']['SQL_Format']
 currentDir = os.path.dirname(os.path.realpath(__file__))
 absDir = jsonConfigTables
 scriptName = "MockData Generator"
-version = "v3.1.24"
+version = "v3.1.242"
 ################################ SETUP AREA ################################
 
 def MockDataGenerator() -> None:

@@ -255,7 +255,7 @@ def CreateRecords(JSON_ALL_TABLES: dict, tableName: str, amountOfRegisters: int,
         counter = 0
         nameOfColumns = GetColumnsNames(JSON_ALL_TABLES, tableName)
         statement = f"INSERT INTO {tableName} ({nameOfColumns}) VALUES("
-        tableRecords+= tableRecords.join(nameOfColumns).join("\n")
+        tableRecords+= f'{nameOfColumns}\n'
         if(sqlStatement):
             register = "Querys"
         else:
