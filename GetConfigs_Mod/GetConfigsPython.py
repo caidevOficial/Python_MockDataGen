@@ -15,18 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import os
 import FileHandle_Mod.FileHandle as FH
 
-################################ SETUP AREA ################################
-#jsonConfigTables = configFile['Configurations']['DatasetFileToOpen']
-#jsonFinalName = configFile['Configurations']['NameOfDatasetToSaveInJson']
-#directoryToSaveCSV = configFile['Configurations']['Directory_To_Save_csvFiles']
-#directoryToSaveJSON = configFile['Configurations']['Directory_To_Save_jsonFiles']
-#directoryToSaveSQL = configFile['Configurations']['Directory_To_Save_sqlFiles']
-#isSQL = configFile['Configurations']['SQL_Format']
-#absDir = jsonConfigTables
-################################ SETUP AREA ################################
 class ScriptConfigurator():
     """[summary]
     Configurator class of the DataMock Generator Script.
@@ -36,7 +26,7 @@ class ScriptConfigurator():
     _currentDir = ''
     _configFile = {}
     _scriptName = "MockData Generator"
-    _version = "v3.2.1"
+    _version = "v3.2.11"
 
     def __init__(self, dir:str) -> None:
         """[summary]
