@@ -18,16 +18,16 @@
 import datetime
 import os
 
-import FileHandle_Mod.FileHandle as FH
-import SearchIfExist_Mod.Search as SF
-from CreateRegisters_Mod.DataCreation import CreateRegisterForCSV as CSV
-from CreateRegisters_Mod.DataCreation import CreateRegisterForSQL as SQL
-from FileHandle_Mod.FileHandle import DoubleMessage as PMD
-from FileHandle_Mod.FileHandle import SingleMessage as PMS
-from GetConfigs_Mod.GetConfigsPython import ScriptConfigurator as GCP
-from Statistics_Mod.Statistics import CountRegisters as CR
-from Statistics_Mod.Statistics import FormatAmountRegisters as FAR
-from Statistics_Mod.Statistics import TimeFormatted as TF
+import Modules.FileHandle_Mod.FileHandle as FH
+import Modules.SearchIfExist_Mod.Search as SF
+from Modules.CreateRegisters_Mod.DataCreation import CreateRegisterForCSV as CSV
+from Modules.CreateRegisters_Mod.DataCreation import CreateRegisterForSQL as SQL
+from Modules.FileHandle_Mod.FileHandle import DoubleMessage as PMD
+from Modules.FileHandle_Mod.FileHandle import SingleMessage as PMS
+from Modules.GetConfigs_Mod.GetConfigsPython import ScriptConfigurator as GCP
+from Modules.Statistics_Mod.Statistics import CountRegisters as CR
+from Modules.Statistics_Mod.Statistics import FormatAmountRegisters as FAR
+from Modules.Statistics_Mod.Statistics import TimeFormatted as TF
 
 ################################ SETUP AREA ################################
 configurator = GCP(os.path.dirname(os.path.realpath(__file__)))
